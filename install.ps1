@@ -58,11 +58,27 @@ Get-ChildItem -Path $installDir -Recurse | Unblock-File
 # Clean up
 Remove-Item $tempZip -Force -ErrorAction SilentlyContinue
 
+# Add to PATH
+Write-Host "Adding to PATH..." -ForegroundColor Yellow
+$userPath = [Environment]::GetEnvironmentVariable("Path", "User")
+if ($userPath -notlike "*$installDir*") {
+    [Environment]::SetEnvironmentVariable("Path", "$userPath;$installDir", "User")
+    $env:Path += ";$installDir"
+    Write-Host "Added to PATH successfully" -ForegroundColor Green
+} else {
+    Write-Host "Already in PATH" -ForegroundColor Green
+}
+
 # Launch
 $exe = Get-ChildItem -Path $installDir -Filter "ADUserManager.exe" -Recurse | Select-Object -First 1
 if ($exe) {
     Write-Host ""
-    Write-Host "Installation complete!" -ForegroundColor Green
+    Write-Host "============================================" -ForegroundColor Green
+    Write-Host "  Installation Complete!" -ForegroundColor Green
+    Write-Host "============================================" -ForegroundColor Green
+    Write-Host ""
+    Write-Host "You can now run 'ADUserManager' from any terminal" -ForegroundColor Cyan
+    Write-Host ""
     Write-Host "Launching ADUserManager..." -ForegroundColor Green
     Start-Process $exe.FullName
 } else {
