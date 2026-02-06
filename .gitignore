@@ -21,6 +21,9 @@ bld/
 ## Publish output
 publish/
 
+## Release packages
+*.zip
+
 ## VS / Rider
 .vs/
 .idea/
