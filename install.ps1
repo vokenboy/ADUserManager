@@ -1,4 +1,4 @@
-# ADUserManager Installer
+# ADUserManager Diegimo Programa
 # Usage: powershell -ExecutionPolicy Bypass -Command "irm https://raw.githubusercontent.com/vokenboy/ADUserManager/main/install.ps1 | iex"
 
 $repo = "vokenboy/adusermanager"
@@ -7,38 +7,38 @@ $installDir = "$env:LOCALAPPDATA\ADUserManager"
 $tempZip = "$env:TEMP\ADUserManager.zip"
 
 Write-Host "============================================" -ForegroundColor Cyan
-Write-Host "  ADUserManager Installer" -ForegroundColor Cyan
+Write-Host "  ADUserManager Diegimo Programa" -ForegroundColor Cyan
 Write-Host "============================================" -ForegroundColor Cyan
 Write-Host ""
 
 # Get latest release download URL
-Write-Host "Fetching latest release..." -ForegroundColor Yellow
+Write-Host "Gaunama naujausia versija..." -ForegroundColor Yellow
 try {
     $release = Invoke-RestMethod -Uri "https://api.github.com/repos/$repo/releases/latest" -Headers @{ "User-Agent" = "ADUserManager-Installer" }
     $asset = $release.assets | Where-Object { $_.name -eq $assetName }
     if (-not $asset) {
-        throw "Could not find $assetName in the latest release."
+        throw "Nerasta $assetName naujausioje versijoje."
     }
     $downloadUrl = $asset.browser_download_url
-    Write-Host "Found version: $($release.tag_name)" -ForegroundColor Green
+    Write-Host "Rasta versija: $($release.tag_name)" -ForegroundColor Green
 } catch {
-    Write-Host "Error: Failed to fetch release info. $_" -ForegroundColor Red
-    Read-Host "Press Enter to exit"
+    Write-Host "Klaida: Nepavyko gauti versijos informacijos. $_" -ForegroundColor Red
+    Read-Host "Paspauskite Enter, kad išeitumėte"
     exit 1
 }
 
 # Download
-Write-Host "Downloading $assetName..." -ForegroundColor Yellow
+Write-Host "Atsisiunčiama $assetName..." -ForegroundColor Yellow
 try {
     Invoke-WebRequest -Uri $downloadUrl -OutFile $tempZip -UseBasicParsing
 } catch {
-    Write-Host "Error: Download failed. $_" -ForegroundColor Red
-    Read-Host "Press Enter to exit"
+    Write-Host "Klaida: Atsisiuntimas nepavyko. $_" -ForegroundColor Red
+    Read-Host "Paspauskite Enter, kad išeitumėte"
     exit 1
 }
 
 # Extract
-Write-Host "Installing to $installDir..." -ForegroundColor Yellow
+Write-Host "Diegiama į $installDir..." -ForegroundColor Yellow
 try {
     if (Test-Path $installDir) {
         Remove-Item -Path $installDir -Recurse -Force
@@ -46,27 +46,27 @@ try {
     New-Item -ItemType Directory -Path $installDir -Force | Out-Null
     Expand-Archive -Path $tempZip -DestinationPath $installDir -Force
 } catch {
-    Write-Host "Error: Extraction failed. $_" -ForegroundColor Red
-    Read-Host "Press Enter to exit"
+    Write-Host "Klaida: Išskleidimas nepavyko. $_" -ForegroundColor Red
+    Read-Host "Paspauskite Enter, kad išeitumėte"
     exit 1
 }
 
 # Unblock all files (removes Mark of the Web to avoid ASR blocks)
-Write-Host "Unblocking files..." -ForegroundColor Yellow
+Write-Host "Atblokuojami failai..." -ForegroundColor Yellow
 Get-ChildItem -Path $installDir -Recurse | Unblock-File
 
 # Clean up
 Remove-Item $tempZip -Force -ErrorAction SilentlyContinue
 
 # Add to PATH
-Write-Host "Adding to PATH..." -ForegroundColor Yellow
+Write-Host "Pridedama į PATH..." -ForegroundColor Yellow
 $userPath = [Environment]::GetEnvironmentVariable("Path", "User")
 if ($userPath -notlike "*$installDir*") {
     [Environment]::SetEnvironmentVariable("Path", "$userPath;$installDir", "User")
     $env:Path += ";$installDir"
-    Write-Host "Added to PATH successfully" -ForegroundColor Green
+    Write-Host "Sėkmingai pridėta į PATH" -ForegroundColor Green
 } else {
-    Write-Host "Already in PATH" -ForegroundColor Green
+    Write-Host "Jau yra PATH" -ForegroundColor Green
 }
 
 # Launch
@@ -74,29 +74,29 @@ $exe = Get-ChildItem -Path $installDir -Filter "ADUserManager.exe" -Recurse | Se
 if ($exe) {
     Write-Host ""
     Write-Host "============================================" -ForegroundColor Green
-    Write-Host "  Installation Complete!" -ForegroundColor Green
+    Write-Host "  Diegimas Baigtas!" -ForegroundColor Green
     Write-Host "============================================" -ForegroundColor Green
     Write-Host ""
-    Write-Host "You can now run 'ADUserManager' from any terminal" -ForegroundColor Cyan
+    Write-Host "Dabar galite paleisti 'ADUserManager' iš bet kurio terminalo" -ForegroundColor Cyan
     Write-Host ""
-    Write-Host "Launching ADUserManager..." -ForegroundColor Green
+    Write-Host "Paleidžiama ADUserManager..." -ForegroundColor Green
     try {
         Start-Process $exe.FullName
     } catch {
         Write-Host ""
-        Write-Host "Warning: Could not auto-launch the application" -ForegroundColor Yellow
-        Write-Host "This is usually due to Windows security settings" -ForegroundColor Yellow
+        Write-Host "Įspėjimas: Nepavyko automatiškai paleisti programos" -ForegroundColor Yellow
+        Write-Host "Tai paprastai dėl Windows saugumo nustatymų" -ForegroundColor Yellow
         Write-Host ""
-        Write-Host "To launch manually:" -ForegroundColor Cyan
-        Write-Host "  1. Navigate to: $installDir" -ForegroundColor White
-        Write-Host "  2. Double-click ADUserManager.exe" -ForegroundColor White
-        Write-Host "  3. If Windows blocks it, click 'More info' then 'Run anyway'" -ForegroundColor White
+        Write-Host "Norėdami paleisti rankiniu būdu:" -ForegroundColor Cyan
+        Write-Host "  1. Eikite į: $installDir" -ForegroundColor White
+        Write-Host "  2. Dukart spustelėkite ADUserManager.exe" -ForegroundColor White
+        Write-Host "  3. Jei Windows blokuoja, spustelėkite 'Daugiau informacijos', tada 'Vis tiek paleisti'" -ForegroundColor White
         Write-Host ""
-        Read-Host "Press Enter to exit"
+        Read-Host "Paspauskite Enter, kad išeitumėte"
     }
 } else {
     Write-Host ""
-    Write-Host "Installation complete, but could not find ADUserManager.exe" -ForegroundColor Yellow
-    Write-Host "Check: $installDir" -ForegroundColor Yellow
-    Read-Host "Press Enter to exit"
+    Write-Host "Diegimas baigtas, bet nerasta ADUserManager.exe" -ForegroundColor Yellow
+    Write-Host "Patikrinkite: $installDir" -ForegroundColor Yellow
+    Read-Host "Paspauskite Enter, kad išeitumėte"
 }

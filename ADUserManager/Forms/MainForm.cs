@@ -17,7 +17,7 @@ public class MainForm : Form
 
     public MainForm()
     {
-        Text = "AD User Manager";
+        Text = "AD Vartotojų Valdytojas";
         Size = new Size(1100, 700);
         StartPosition = FormStartPosition.CenterScreen;
         Icon = SystemIcons.Shield;
@@ -29,17 +29,17 @@ public class MainForm : Form
         catch (Exception ex)
         {
             MessageBox.Show(
-                $"Could not connect to Active Directory:\n{ex.Message}\n\nThe application will open but AD features will be unavailable.",
-                "AD Connection Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                $"Nepavyko prisijungti prie Active Directory:\n{ex.Message}\n\nPrograma atsidarys, bet AD funkcijos bus neprieinamos.",
+                "AD Prisijungimo Klaida", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
         // Toolbar
         _toolbar = new ToolStrip { Dock = DockStyle.Top };
 
-        var refreshBtn = new ToolStripButton("Refresh") { Image = null, DisplayStyle = ToolStripItemDisplayStyle.Text };
+        var refreshBtn = new ToolStripButton("Atnaujinti") { Image = null, DisplayStyle = ToolStripItemDisplayStyle.Text };
         refreshBtn.Click += (_, _) => LoadUsers();
 
-        var exportBtn = new ToolStripButton("Export CSV") { DisplayStyle = ToolStripItemDisplayStyle.Text };
+        var exportBtn = new ToolStripButton("Eksportuoti CSV") { DisplayStyle = ToolStripItemDisplayStyle.Text };
         exportBtn.Click += OnExportCsv;
 
         _toolbar.Items.AddRange(new ToolStripItem[] { refreshBtn, new ToolStripSeparator(), exportBtn });
@@ -47,10 +47,10 @@ public class MainForm : Form
 
         // Search panel
         var searchPanel = new Panel { Dock = DockStyle.Top, Height = 40, Padding = new Padding(5) };
-        var searchLabel = new Label { Text = "Search:", Dock = DockStyle.Left, AutoSize = true, TextAlign = ContentAlignment.MiddleLeft, Padding = new Padding(0, 5, 5, 0) };
+        var searchLabel = new Label { Text = "Ieškoti:", Dock = DockStyle.Left, AutoSize = true, TextAlign = ContentAlignment.MiddleLeft, Padding = new Padding(0, 5, 5, 0) };
         _searchBox = new TextBox { Dock = DockStyle.Fill };
         _searchBox.KeyDown += (_, e) => { if (e.KeyCode == Keys.Enter) { LoadUsers(); e.SuppressKeyPress = true; } };
-        var searchBtn = new Button { Text = "Search", Dock = DockStyle.Right, Width = 80 };
+        var searchBtn = new Button { Text = "Ieškoti", Dock = DockStyle.Right, Width = 80 };
         searchBtn.Click += (_, _) => LoadUsers();
 
         searchPanel.Controls.Add(_searchBox);
@@ -74,20 +74,20 @@ public class MainForm : Form
 
         _grid.Columns.AddRange(new DataGridViewColumn[]
         {
-            new DataGridViewTextBoxColumn { Name = "DisplayName", HeaderText = "Name", FillWeight = 20 },
-            new DataGridViewTextBoxColumn { Name = "SamAccountName", HeaderText = "Username", FillWeight = 15 },
-            new DataGridViewTextBoxColumn { Name = "Email", HeaderText = "Email", FillWeight = 20 },
-            new DataGridViewTextBoxColumn { Name = "Department", HeaderText = "Department", FillWeight = 15 },
-            new DataGridViewTextBoxColumn { Name = "Status", HeaderText = "Status", FillWeight = 10 },
-            new DataGridViewTextBoxColumn { Name = "LastLogon", HeaderText = "Last Logon", FillWeight = 15 }
+            new DataGridViewTextBoxColumn { Name = "DisplayName", HeaderText = "Vardas", FillWeight = 20 },
+            new DataGridViewTextBoxColumn { Name = "SamAccountName", HeaderText = "Prisijungimo vardas", FillWeight = 15 },
+            new DataGridViewTextBoxColumn { Name = "Email", HeaderText = "El. paštas", FillWeight = 20 },
+            new DataGridViewTextBoxColumn { Name = "Department", HeaderText = "Skyrius", FillWeight = 15 },
+            new DataGridViewTextBoxColumn { Name = "Status", HeaderText = "Būsena", FillWeight = 10 },
+            new DataGridViewTextBoxColumn { Name = "LastLogon", HeaderText = "Paskutinis prisijungimas", FillWeight = 15 }
         });
 
         Controls.Add(_grid);
 
         // Status bar
         _statusBar = new StatusStrip();
-        _statusLabel = new ToolStripStatusLabel { Text = _adService != null ? $"Connected to: {_adService.DomainName}" : "Not connected to AD" };
-        _countLabel = new ToolStripStatusLabel { Text = "Users: 0", Alignment = ToolStripItemAlignment.Right };
+        _statusLabel = new ToolStripStatusLabel { Text = _adService != null ? $"Prisijungta prie: {_adService.DomainName}" : "Neprisijungta prie AD" };
+        _countLabel = new ToolStripStatusLabel { Text = "Vartotojų: 0", Alignment = ToolStripItemAlignment.Right };
         _statusBar.Items.AddRange(new ToolStripItem[] { _statusLabel, new ToolStripStatusLabel { Spring = true }, _countLabel });
         Controls.Add(_statusBar);
 
@@ -102,11 +102,11 @@ public class MainForm : Form
             Cursor = Cursors.WaitCursor;
             _currentUsers = _adService.SearchUsers(_searchBox.Text.Trim());
             PopulateGrid();
-            _countLabel.Text = $"Users: {_currentUsers.Count}";
+            _countLabel.Text = $"Vartotojų: {_currentUsers.Count}";
         }
         catch (Exception ex)
         {
-            MessageBox.Show($"Error loading users:\n{ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show($"Klaida įkeliant vartotojus:\n{ex.Message}", "Klaida", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
         finally
         {
@@ -119,14 +119,14 @@ public class MainForm : Form
         _grid.Rows.Clear();
         foreach (var user in _currentUsers)
         {
-            var status = !user.IsEnabled ? "Disabled" : user.IsLockedOut ? "Locked" : "Active";
+            var status = !user.IsEnabled ? "Išjungtas" : user.IsLockedOut ? "Užrakintas" : "Aktyvus";
             _grid.Rows.Add(
                 user.DisplayName,
                 user.SamAccountName,
                 user.Email,
                 user.Department,
                 status,
-                user.LastLogon?.ToString("yyyy-MM-dd HH:mm") ?? "Never"
+                user.LastLogon?.ToString("yyyy-MM-dd HH:mm") ?? "Niekada"
             );
         }
     }
@@ -135,15 +135,15 @@ public class MainForm : Form
     {
         if (_currentUsers.Count == 0)
         {
-            MessageBox.Show("No users to export.", "Export", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Nėra vartotojų eksportavimui.", "Eksportas", MessageBoxButtons.OK, MessageBoxIcon.Information);
             return;
         }
 
         using var dialog = new SaveFileDialog
         {
-            Filter = "CSV files (*.csv)|*.csv",
+            Filter = "CSV failai (*.csv)|*.csv",
             DefaultExt = "csv",
-            FileName = $"AD_Users_{DateTime.Now:yyyyMMdd_HHmmss}.csv"
+            FileName = $"AD_Vartotojai_{DateTime.Now:yyyyMMdd_HHmmss}.csv"
         };
 
         if (dialog.ShowDialog() != DialogResult.OK) return;
@@ -151,18 +151,18 @@ public class MainForm : Form
         try
         {
             var sb = new StringBuilder();
-            sb.AppendLine("Username,Display Name,First Name,Last Name,Email,Department,Title,Status,Last Logon,Password Last Set");
+            sb.AppendLine("Prisijungimo vardas,Veiklos vardas,Vardas,Pavardė,El. paštas,Skyrius,Pareigos,Būsena,Paskutinis prisijungimas,Slaptažodžio keitimas");
             foreach (var u in _currentUsers)
             {
-                var status = !u.IsEnabled ? "Disabled" : u.IsLockedOut ? "Locked" : "Active";
+                var status = !u.IsEnabled ? "Išjungtas" : u.IsLockedOut ? "Užrakintas" : "Aktyvus";
                 sb.AppendLine($"\"{u.SamAccountName}\",\"{u.DisplayName}\",\"{u.FirstName}\",\"{u.LastName}\",\"{u.Email}\",\"{u.Department}\",\"{u.Title}\",\"{status}\",\"{u.LastLogon?.ToString("yyyy-MM-dd HH:mm") ?? ""}\",\"{u.PasswordLastSet?.ToString("yyyy-MM-dd HH:mm") ?? ""}\"");
             }
             File.WriteAllText(dialog.FileName, sb.ToString(), Encoding.UTF8);
-            MessageBox.Show($"Exported {_currentUsers.Count} users to:\n{dialog.FileName}", "Export Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show($"Eksportuota {_currentUsers.Count} vartotojų į:\n{dialog.FileName}", "Eksportas Baigtas", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         catch (Exception ex)
         {
-            MessageBox.Show($"Error exporting:\n{ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show($"Eksportavimo klaida:\n{ex.Message}", "Klaida", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 
