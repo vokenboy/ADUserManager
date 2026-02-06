@@ -80,7 +80,20 @@ if ($exe) {
     Write-Host "You can now run 'ADUserManager' from any terminal" -ForegroundColor Cyan
     Write-Host ""
     Write-Host "Launching ADUserManager..." -ForegroundColor Green
-    Start-Process $exe.FullName
+    try {
+        Start-Process $exe.FullName
+    } catch {
+        Write-Host ""
+        Write-Host "Warning: Could not auto-launch the application" -ForegroundColor Yellow
+        Write-Host "This is usually due to Windows security settings" -ForegroundColor Yellow
+        Write-Host ""
+        Write-Host "To launch manually:" -ForegroundColor Cyan
+        Write-Host "  1. Navigate to: $installDir" -ForegroundColor White
+        Write-Host "  2. Double-click ADUserManager.exe" -ForegroundColor White
+        Write-Host "  3. If Windows blocks it, click 'More info' then 'Run anyway'" -ForegroundColor White
+        Write-Host ""
+        Read-Host "Press Enter to exit"
+    }
 } else {
     Write-Host ""
     Write-Host "Installation complete, but could not find ADUserManager.exe" -ForegroundColor Yellow
