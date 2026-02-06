@@ -4,33 +4,33 @@ A Windows application for managing Active Directory users and groups.
 
 ## Installation
 
-### Quick Install (One-Liner)
+### Greitas Diegimas (Viena Eilutė)
 
-Host `install.ps1` on a public server (e.g., GitHub Gist, S3, your website), then users can run:
+Paleiskite šią komandą PowerShell:
 
 ```powershell
-powershell -ExecutionPolicy Bypass -Command "irm https://your-hosted-url/install.ps1 | iex"
+powershell -ExecutionPolicy Bypass -Command "irm https://raw.githubusercontent.com/vokenboy/ADUserManager/main/install.ps1 | iex"
 ```
 
-This will:
-- Download and extract the latest release
-- Add ADUserManager to your PATH
-- Launch the application
+Tai atliks:
+- Atsisiųs ir išskleis naujausią versiją
+- Pridės ADUserManager į PATH
+- Paleis programą
 
-You can then run `ADUserManager` from any terminal.
+Tada galėsite paleisti `ADUserManager` iš bet kurio terminalo.
 
-### Manual Install:
-1. Download `ADUserManager.zip` from the [latest release](../../releases/latest)
-2. Extract to a folder
-3. Run `ADUserManager.exe`
+### Rankinis Diegimas:
+1. Atsisiųskite `ADUserManager.zip` iš [naujausio leidimo](../../releases/latest)
+2. Išskleiskite į aplanką
+3. Paleiskite `ADUserManager.exe`
 
-## Requirements
+## Reikalavimai
 
 - Windows 10/11
-- .NET 10 Runtime (included in single-file build)
-- Active Directory access
+- .NET 10 Runtime (įtrauktas į vieną failą)
+- Active Directory prieiga
 
-## Building
+## Kūrimas
 
 ```bash
 dotnet publish -c Release -r win-x64 --self-contained true /p:PublishSingleFile=true
