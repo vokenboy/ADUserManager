@@ -1,5 +1,5 @@
 # ADUserManager Installer
-# Usage: powershell -ExecutionPolicy Bypass -Command "irm https://raw.githubusercontent.com/vokenboy/adusermanager/main/install.ps1 | iex"
+# Usage: powershell -ExecutionPolicy Bypass -Command "irm https://raw.githubusercontent.com/vokenboy/ADUserManager/main/install.ps1 | iex"
 
 $repo = "vokenboy/adusermanager"
 $assetName = "ADUserManager.zip"

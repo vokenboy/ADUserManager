@@ -1,11 +1,12 @@
 using System.Text;
 using ADUserManager.Services;
+using ADUserManager.Services.Models;
 
 namespace ADUserManager.Forms;
 
 public class MainForm : Form
 {
-    private readonly ActiveDirectoryService? _adService;
+    private readonly UserService? _adService;
     private readonly DataGridView _grid;
     private readonly TextBox _searchBox;
     private readonly ToolStrip _toolbar;
@@ -23,7 +24,7 @@ public class MainForm : Form
 
         try
         {
-            _adService = new ActiveDirectoryService();
+            _adService = new UserService();
         }
         catch (Exception ex)
         {

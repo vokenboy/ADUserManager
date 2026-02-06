@@ -7,7 +7,7 @@ A Windows application for managing Active Directory users and groups.
 Install via PowerShell:
 
 ```powershell
-powershell -ExecutionPolicy Bypass -Command "irm https://raw.githubusercontent.com/vokenboy/adusermanager/main/install.ps1 | iex"
+powershell -ExecutionPolicy Bypass -Command "irm https://raw.githubusercontent.com/vokenboy/ADUserManager/main/install.ps1 | iex"
 ```
 
 Or manually:
