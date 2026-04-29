@@ -1,0 +1,48 @@
+## .NET / Visual Studio
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## NuGet
+*.nupkg
+**/packages/*
+
+## Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+build/
+bld/
+*.binlog
+
+## Publish output
+publish/
+
+## Release packages
+*.zip
+
+## VS / Rider
+.vs/
+.idea/
+.claude/
+*.rsuser
+*.DotSettings.user
+
+## Local tool/cache state
+.dotnet/
+.dotnet_home/
+Microsoft/Windows/PowerShell/ModuleAnalysisCache
+
+## Runtime logs/state
+crash.log
+memento_states.json
+
+## OS
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store

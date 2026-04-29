@@ -1,0 +1,40 @@
+<Page x:Class="ActiveManager.Views.Pages.ErrorLogPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:loc="clr-namespace:ActiveManager.Localization">
+
+    <Grid Margin="24,16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,12">
+            <ui:Button Content="{Binding [Button_Clear], Source={x:Static loc:TranslationSource.Instance}}"
+                Style="{StaticResource GhostDangerButtonStyle}"
+                Icon="{ui:SymbolIcon Delete24}"
+                Click="OnClear" />
+        </StackPanel>
+
+        <DataGrid Grid.Row="1"
+            x:Name="ErrorGrid"
+            AutoGenerateColumns="False"
+            IsReadOnly="True"
+            SelectionMode="Single"
+            CanUserAddRows="False"
+            CanUserDeleteRows="False"
+            HeadersVisibility="Column"
+            GridLinesVisibility="Horizontal"
+            BorderThickness="1"
+            BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+            MouseDoubleClick="OnRowDoubleClick">
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="{Binding [Column_Time], Source={x:Static loc:TranslationSource.Instance}}" Binding="{Binding TimestampText}" Width="150" />
+                <DataGridTextColumn Header="{Binding [Column_Source], Source={x:Static loc:TranslationSource.Instance}}" Binding="{Binding Source}" Width="200" />
+                <DataGridTextColumn Header="{Binding [Column_Message], Source={x:Static loc:TranslationSource.Instance}}" Binding="{Binding Message}" Width="*" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Page>

@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="ADUserManager/ActiveManager.csproj" />
+  <Project Path="ActiveManager.Tests/ActiveManager.Tests.csproj" />
+</Solution>

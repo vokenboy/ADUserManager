@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+
+  <!-- Navigation -->
+  <data name="Nav_Dashboard" xml:space="preserve"><value>Dashboard</value></data>
+  <data name="Nav_Users" xml:space="preserve"><value>Users</value></data>
+  <data name="Nav_Restore" xml:space="preserve"><value>Restore</value></data>
+  <data name="Nav_ErrorLog" xml:space="preserve"><value>Error Log</value></data>
+  <data name="Nav_Settings" xml:space="preserve"><value>Settings</value></data>
+
+  <!-- Status bar -->
+  <data name="Status_AdDisconnected" xml:space="preserve"><value>AD disconnected</value></data>
+  <data name="Status_AdConnectedTo" xml:space="preserve"><value>Connected to</value></data>
+  <data name="Status_AdUnavailable" xml:space="preserve"><value>AD: unavailable</value></data>
+  <data name="Status_DbConnected" xml:space="preserve"><value>DB: connected</value></data>
+  <data name="Status_DbUnavailable" xml:space="preserve"><value>DB: unavailable</value></data>
+  <data name="Status_DbConnecting" xml:space="preserve"><value>DB: connecting...</value></data>
+  <data name="Status_Users" xml:space="preserve"><value>Users</value></data>
+
+  <!-- Common buttons -->
+  <data name="Button_Save" xml:space="preserve"><value>Save</value></data>
+  <data name="Button_Cancel" xml:space="preserve"><value>Cancel</value></data>
+  <data name="Button_Reset" xml:space="preserve"><value>Reset</value></data>
+  <data name="Button_Refresh" xml:space="preserve"><value>Refresh</value></data>
+  <data name="Button_Close" xml:space="preserve"><value>Close</value></data>
+  <data name="Button_Confirm" xml:space="preserve"><value>Confirm</value></data>
+  <data name="Button_Clear" xml:space="preserve"><value>Clear</value></data>
+  <data name="Button_Restore" xml:space="preserve"><value>Restore</value></data>
+  <data name="Button_Edit" xml:space="preserve"><value>Edit</value></data>
+  <data name="Button_Delete" xml:space="preserve"><value>Delete</value></data>
+
+  <!-- Common labels -->
+  <data name="Label_FirstName" xml:space="preserve"><value>First name</value></data>
+  <data name="Label_LastName" xml:space="preserve"><value>Last name</value></data>
+  <data name="Label_Email" xml:space="preserve"><value>Email</value></data>
+  <data name="Label_Username" xml:space="preserve"><value>Username</value></data>
+  <data name="Label_Department" xml:space="preserve"><value>Department</value></data>
+  <data name="Label_JobTitle" xml:space="preserve"><value>Job title</value></data>
+  <data name="Label_Description" xml:space="preserve"><value>Description</value></data>
+  <data name="Label_PrimaryEmail" xml:space="preserve"><value>Primary email</value></data>
+  <data name="Label_AccountStatus" xml:space="preserve"><value>Account status</value></data>
+  <data name="Label_OrganizationalUnit" xml:space="preserve"><value>Organizational unit</value></data>
+  <data name="Label_DistinguishedName" xml:space="preserve"><value>Distinguished name</value></data>
+  <data name="Label_GroupMemberships" xml:space="preserve"><value>Group memberships</value></data>
+  <data name="Label_LastSignIn" xml:space="preserve"><value>Last sign-in</value></data>
+  <data name="Label_PasswordUpdated" xml:space="preserve"><value>Password updated</value></data>
+  <data name="Label_CurrentState" xml:space="preserve"><value>Current state</value></data>
+  <data name="Label_AccountEnabled" xml:space="preserve"><value>Account enabled</value></data>
+  <data name="Label_Locked" xml:space="preserve"><value>Locked</value></data>
+  <data name="Label_Location" xml:space="preserve"><value>Location</value></data>
+  <data name="Label_Name" xml:space="preserve"><value>Name</value></data>
+  <data name="Label_Captured" xml:space="preserve"><value>Captured</value></data>
+  <data name="Label_CapturedBy" xml:space="preserve"><value>Captured by</value></data>
+  <data name="Label_CreatedBy" xml:space="preserve"><value>Created by</value></data>
+  <data name="Label_Expiration" xml:space="preserve"><value>Expiration</value></data>
+  <data name="Label_DirectoryPlacement" xml:space="preserve"><value>Directory placement</value></data>
+  <data name="Label_PasswordLastChanged" xml:space="preserve"><value>Password last changed</value></data>
+  <data name="Label_Server" xml:space="preserve"><value>Server / Instance:</value></data>
+  <data name="Label_Port" xml:space="preserve"><value>Port:</value></data>
+  <data name="Label_CompanyName" xml:space="preserve"><value>Company Name:</value></data>
+  <data name="Label_DomainName" xml:space="preserve"><value>Domain Name:</value></data>
+  <data name="Label_Format" xml:space="preserve"><value>Format:</value></data>
+  <data name="Label_Path" xml:space="preserve"><value>Path:</value></data>
+  <data name="Label_Permissions" xml:space="preserve"><value>Permissions</value></data>
+  <data name="Label_Database" xml:space="preserve"><value>Database:</value></data>
+  <data name="Label_User" xml:space="preserve"><value>User:</value></data>
+  <data name="Label_Password" xml:space="preserve"><value>Password:</value></data>
+  <data name="Label_ConnectionString" xml:space="preserve"><value>Connection String:</value></data>
+  <data name="Label_ConnectionString_Hint" xml:space="preserve"><value>Paste a full connection string to override the fields above. Click "Parse" to extract its values into the fields instead.</value></data>
+  <data name="Btn_ParseConnectionString" xml:space="preserve"><value>Parse to fields</value></data>
+
+  <!-- Common sections -->
+  <data name="Section_Identity" xml:space="preserve"><value>Identity</value></data>
+  <data name="Section_Actions" xml:space="preserve"><value>Actions</value></data>
+  <data name="Section_Groups" xml:space="preserve"><value>Groups</value></data>
+  <data name="Section_Description" xml:space="preserve"><value>Description</value></data>
+  <data name="Section_SecurityTimeline" xml:space="preserve"><value>Security timeline</value></data>
+  <data name="Section_StateSnapshot" xml:space="preserve"><value>State snapshot</value></data>
+  <data name="Section_RestoreMetadata" xml:space="preserve"><value>Restore metadata</value></data>
+  <data name="Section_DistinguishedName" xml:space="preserve"><value>Distinguished name</value></data>
+  <data name="Section_ProfilePlacement" xml:space="preserve"><value>Profile and placement</value></data>
+
+  <!-- Column headers -->
+  <data name="Column_Name" xml:space="preserve"><value>Name</value></data>
+  <data name="Column_Username" xml:space="preserve"><value>Username</value></data>
+  <data name="Column_Email" xml:space="preserve"><value>Email</value></data>
+  <data name="Column_Status" xml:space="preserve"><value>Status</value></data>
+  <data name="Column_LastSignIn" xml:space="preserve"><value>Last sign-in</value></data>
+  <data name="Column_Location" xml:space="preserve"><value>Location</value></data>
+  <data name="Column_GroupCount" xml:space="preserve"><value>Group count</value></data>
+  <data name="Column_Captured" xml:space="preserve"><value>Captured</value></data>
+  <data name="Column_CapturedBy" xml:space="preserve"><value>Captured by</value></data>
+  <data name="Column_Time" xml:space="preserve"><value>Time</value></data>
+  <data name="Column_Source" xml:space="preserve"><value>Source</value></data>
+  <data name="Column_Message" xml:space="preserve"><value>Message</value></data>
+  <data name="Column_ID" xml:space="preserve"><value>ID</value></data>
+  <data name="Column_TerminatedOn" xml:space="preserve"><value>Terminated on</value></data>
+  <data name="Column_PerformedBy" xml:space="preserve"><value>Performed by</value></data>
+  <data name="Column_Actions" xml:space="preserve"><value>Actions</value></data>
+  <data name="Column_Step" xml:space="preserve"><value>Step</value></data>
+  <data name="Column_ResetBy" xml:space="preserve"><value>Reset by</value></data>
+  <data name="Column_When" xml:space="preserve"><value>When</value></data>
+  <data name="Column_ForceChange" xml:space="preserve"><value>Force change</value></data>
+  <data name="Column_DN" xml:space="preserve"><value>DN</value></data>
+  <data name="Search_PasswordReset_Placeholder" xml:space="preserve"><value>Search password reset history...</value></data>
+
+  <!-- Status values -->
+  <data name="UserStatus_Active" xml:space="preserve"><value>Active</value></data>
+  <data name="UserStatus_Disabled" xml:space="preserve"><value>Disabled</value></data>
+  <data name="UserStatus_Locked" xml:space="preserve"><value>Locked</value></data>
+  <data name="Value_Never" xml:space="preserve"><value>Never</value></data>
+  <data name="Value_Yes" xml:space="preserve"><value>Yes</value></data>
+  <data name="Value_No" xml:space="preserve"><value>No</value></data>
+  <data name="Value_NoGroups" xml:space="preserve"><value>No groups</value></data>
+  <data name="Value_OneGroup" xml:space="preserve"><value>1 group</value></data>
+  <data name="Value_NoGroupsFound" xml:space="preserve"><value>No groups found</value></data>
+  <data name="Value_NGroups" xml:space="preserve"><value>{0} groups</value></data>
+  <data name="Value_NoDepartment" xml:space="preserve"><value>No department</value></data>
+  <data name="Value_TitleUnavailable" xml:space="preserve"><value>title unavailable</value></data>
+  <data name="Value_NoTitle" xml:space="preserve"><value>No title</value></data>
+
+  <!-- Filter options -->
+  <data name="Filter_Status" xml:space="preserve"><value>Status</value></data>
+  <data name="Filter_OrganizationalUnit" xml:space="preserve"><value>Organizational unit</value></data>
+  <data name="Filter_LastSignIn" xml:space="preserve"><value>Last sign-in</value></data>
+  <data name="Filter_PasswordUpdated" xml:space="preserve"><value>Password updated</value></data>
+  <data name="Filter_All" xml:space="preserve"><value>All</value></data>
+  <data name="Filter_Active" xml:space="preserve"><value>Active</value></data>
+  <data name="Filter_Disabled" xml:space="preserve"><value>Disabled</value></data>
+  <data name="Filter_Locked" xml:space="preserve"><value>Locked</value></data>
+  <data name="Filter_AnyTime" xml:space="preserve"><value>Any time</value></data>
+  <data name="Filter_Last7Days" xml:space="preserve"><value>Last 7 days</value></data>
+  <data name="Filter_Last30Days" xml:space="preserve"><value>Last 30 days</value></data>
+  <data name="Filter_Last90Days" xml:space="preserve"><value>Last 90 days</value></data>
+  <data name="Filter_Over90Days" xml:space="preserve"><value>Over 90 days</value></data>
+  <data name="Filter_Over180Days" xml:space="preserve"><value>Over 180 days</value></data>
+  <data name="Filter_Over1Year" xml:space="preserve"><value>Over 1 year</value></data>
+  <data name="Filter_NeverSignedIn" xml:space="preserve"><value>Never signed in</value></data>
+  <data name="Filter_NeverUpdated" xml:space="preserve"><value>Never updated</value></data>
+
+  <!-- Dashboard page -->
+  <data name="Page_Dashboard_Title" xml:space="preserve"><value>Admin Dashboard</value></data>
+  <data name="Dashboard_AdStatus" xml:space="preserve"><value>AD Status</value></data>
+  <data name="Dashboard_Database" xml:space="preserve"><value>Database</value></data>
+  <data name="Dashboard_RecentBackups" xml:space="preserve"><value>Recent Backups</value></data>
+  <data name="Dashboard_Last7Days" xml:space="preserve"><value>Last 7 days</value></data>
+  <data name="Dashboard_RestoreCoverage" xml:space="preserve"><value>Restore Coverage</value></data>
+  <data name="Dashboard_TotalUsers" xml:space="preserve"><value>Total Users</value></data>
+  <data name="Dashboard_Active" xml:space="preserve"><value>Active</value></data>
+  <data name="Dashboard_DisabledLocked" xml:space="preserve"><value>Disabled / Locked</value></data>
+  <data name="Dashboard_AttentionRequired" xml:space="preserve"><value>Attention Required</value></data>
+  <data name="Dashboard_QuickActions" xml:space="preserve"><value>Quick Actions</value></data>
+  <data name="Dashboard_OpenUsers" xml:space="preserve"><value>Open Users</value></data>
+  <data name="Dashboard_CreateUser" xml:space="preserve"><value>Add User</value></data>
+  <data name="Dashboard_OpenRestore" xml:space="preserve"><value>Open Restore</value></data>
+  <data name="Dashboard_OpenHistory" xml:space="preserve"><value>Open History</value></data>
+  <data name="Dashboard_ErrorLog" xml:space="preserve"><value>Error Log</value></data>
+  <data name="Dashboard_LastUpdated" xml:space="preserve"><value>Last updated</value></data>
+  <data name="Dashboard_Connected" xml:space="preserve"><value>Connected</value></data>
+  <data name="Dashboard_Unavailable" xml:space="preserve"><value>Unavailable</value></data>
+  <data name="Dashboard_DomainNotDetected" xml:space="preserve"><value>Domain: not detected</value></data>
+  <data name="Dashboard_Domain" xml:space="preserve"><value>Domain: {0}</value></data>
+  <data name="Dashboard_Company" xml:space="preserve"><value>Company: {0}</value></data>
+  <data name="Dashboard_CoverageSummary" xml:space="preserve"><value>{0} local / {1} restored</value></data>
+  <data name="Dashboard_ErrorsInSession" xml:space="preserve"><value>Errors in session: {0}</value></data>
+  <data name="Dashboard_InactiveThreshold" xml:space="preserve"><value>Inactive &gt; {0} days</value></data>
+  <data name="Dashboard_NoAlerts" xml:space="preserve"><value>No active dashboard alerts.</value></data>
+  <data name="Dashboard_AlertSeverityOk" xml:space="preserve"><value>OK</value></data>
+
+  <!-- Users page -->
+  <data name="Search_Users_Placeholder" xml:space="preserve"><value>Search users...</value></data>
+  <data name="Button_RestoreFromFile" xml:space="preserve"><value>Restore from file</value></data>
+  <data name="Button_AddUser" xml:space="preserve"><value>Add user</value></data>
+  <data name="Button_ClearFilters" xml:space="preserve"><value>Clear filters</value></data>
+  <data name="Button_ResetPassword" xml:space="preserve"><value>Reset password</value></data>
+  <data name="Button_Terminate" xml:space="preserve"><value>Terminate</value></data>
+  <data name="Users_SelectUser_Title" xml:space="preserve"><value>Select a user</value></data>
+  <data name="Users_SelectUser_Body" xml:space="preserve"><value>Choose an account from the table to inspect identity, directory placement, security timestamps, group memberships, and available actions.</value></data>
+  <data name="Users_NoMatch_Title" xml:space="preserve"><value>No users match the current filters</value></data>
+  <data name="Users_NoMatch_Body" xml:space="preserve"><value>Adjust the search text or clear one or more filters to see matching accounts.</value></data>
+  <data name="Users_NoUsers_Title" xml:space="preserve"><value>No users found</value></data>
+  <data name="Users_NoUsers_Body" xml:space="preserve"><value>Try a different search term or refresh the table to load accounts.</value></data>
+  <data name="Users_Actions_Hint" xml:space="preserve"><value>Manage the selected account directly from this panel.</value></data>
+
+  <!-- Restore page -->
+  <data name="Page_Restore_Title" xml:space="preserve"><value>Restore</value></data>
+  <data name="Restore_Tab_Local" xml:space="preserve"><value>Local</value></data>
+  <data name="Restore_Tab_Remote" xml:space="preserve"><value>Remote</value></data>
+  <data name="Restore_SelectRecord_Title" xml:space="preserve"><value>Select a restore record</value></data>
+  <data name="Restore_NoSavedChanges" xml:space="preserve"><value>No saved changes yet. User states are captured automatically during termination.</value></data>
+  <data name="Restore_DbConnecting" xml:space="preserve"><value>Connecting to database...</value></data>
+  <data name="Restore_Actions_Hint_Local" xml:space="preserve"><value>Restore the selected user state directly from this panel.</value></data>
+  <data name="Restore_Actions_Hint_Remote" xml:space="preserve"><value>Restore the selected user state directly from this panel. Remote records are archived after a successful restore.</value></data>
+  <data name="Button_RestoreUser" xml:space="preserve"><value>Restore user</value></data>
+  <data name="Search_Placeholder" xml:space="preserve"><value>Search...</value></data>
+
+  <!-- History page -->
+  <data name="Search_History_Placeholder" xml:space="preserve"><value>Search history...</value></data>
+  <data name="Button_RestoreHistory" xml:space="preserve"><value>Restore</value></data>
+  <data name="History_StatusTerminated" xml:space="preserve"><value>Terminated</value></data>
+  <data name="History_StatusRestored" xml:space="preserve"><value>Restored ({0})</value></data>
+  <data name="History_StatusDeleted" xml:space="preserve"><value>Deleted ({0})</value></data>
+  <data name="History_StatusUnavailable" xml:space="preserve"><value>Unavailable</value></data>
+  <data name="History_StepDisabled" xml:space="preserve"><value>Disabled</value></data>
+  <data name="History_StepMoved" xml:space="preserve"><value>Moved</value></data>
+  <data name="History_StepPassword" xml:space="preserve"><value>Password</value></data>
+  <data name="History_StepGroups" xml:space="preserve"><value>Groups</value></data>
+  <data name="History_StepExpiration" xml:space="preserve"><value>Expiration</value></data>
+  <data name="History_StepExport" xml:space="preserve"><value>Export</value></data>
+  <data name="Msg_DbUnavailable" xml:space="preserve"><value>Database unavailable</value></data>
+
+  <!-- Settings page -->
+  <data name="Page_Settings_Title" xml:space="preserve"><value>Settings</value></data>
+  <data name="Settings_Tab_General" xml:space="preserve"><value>General</value></data>
+  <data name="Settings_Tab_Profile" xml:space="preserve"><value>My Profile</value></data>
+  <data name="Settings_Tab_Database" xml:space="preserve"><value>Database</value></data>
+  <data name="Settings_Tab_Email" xml:space="preserve"><value>Email</value></data>
+  <data name="Settings_Language_Title" xml:space="preserve"><value>Language</value></data>
+  <data name="Settings_Language_Label" xml:space="preserve"><value>App language:</value></data>
+  <data name="Settings_Language_Hint" xml:space="preserve"><value>Changes apply immediately without restarting the app.</value></data>
+  <data name="Profile_ProtectedAccountDetails" xml:space="preserve"><value>Protected account details</value></data>
+  <data name="Profile_ProtectedMemberships" xml:space="preserve"><value>Protected memberships</value></data>
+  <data name="Profile_ProtectedMembershipsHint" xml:space="preserve"><value>Groups and placement stay admin-managed and are shown here for context.</value></data>
+  <data name="Profile_EditableDetails" xml:space="preserve"><value>Editable profile details</value></data>
+  <data name="Profile_EditableDetailsHint_Settings" xml:space="preserve"><value>The form is optimized for longer notes and profile context. Sensitive account controls stay locked.</value></data>
+  <data name="Profile_EditableDetailsHint_Profile" xml:space="preserve"><value>You can update basic identity and contact information. Sensitive account controls stay locked.</value></data>
+  <data name="Profile_SaveChanges" xml:space="preserve"><value>Save changes</value></data>
+  <data name="Profile_Unavailable_Title" xml:space="preserve"><value>Profile unavailable</value></data>
+  <data name="Profile_Unavailable_Message" xml:space="preserve"><value>The signed-in account could not be resolved.</value></data>
+  <data name="Db_Title" xml:space="preserve"><value>SQL Server Database</value></data>
+  <data name="Db_HintText" xml:space="preserve"><value>Connects to SQL Server or SQL Server Express on startup. For a local instance use .\SQLEXPRESS or localhost\SQLEXPRESS as the server. Leave User blank to use Windows Authentication. The database is created automatically if it does not exist.</value></data>
+  <data name="Db_CompanyNameHint" xml:space="preserve"><value>Identifies this AD instance in a shared database (multi-tenant). Defaults to the Windows domain name when left blank.</value></data>
+  <data name="Button_TestConnection" xml:space="preserve"><value>Test connection</value></data>
+  <data name="Button_Reconnect" xml:space="preserve"><value>Reconnect</value></data>
+  <data name="Email_Title" xml:space="preserve"><value>Email notifications</value></data>
+  <data name="Email_HintText" xml:space="preserve"><value>Configure SMTP to receive notifications when users are terminated or rolled back.</value></data>
+  <data name="Email_EnableNotifications" xml:space="preserve"><value>Enable notifications:</value></data>
+  <data name="Email_SmtpServer" xml:space="preserve"><value>SMTP server:</value></data>
+  <data name="Email_UseStartTls" xml:space="preserve"><value>Use STARTTLS</value></data>
+  <data name="Email_SenderAddress" xml:space="preserve"><value>Sender address:</value></data>
+  <data name="Email_SenderName" xml:space="preserve"><value>Sender name:</value></data>
+  <data name="Email_SmtpUsername" xml:space="preserve"><value>SMTP username:</value></data>
+  <data name="Email_SmtpPassword" xml:space="preserve"><value>SMTP password:</value></data>
+  <data name="Email_Recipients" xml:space="preserve"><value>Recipients (one per line):</value></data>
+  <data name="Email_NotifyWhen" xml:space="preserve"><value>Send notifications when:</value></data>
+  <data name="Email_NotifyTermination" xml:space="preserve"><value>A user is terminated</value></data>
+  <data name="Email_NotifyRollback" xml:space="preserve"><value>A termination is rolled back</value></data>
+  <data name="Email_NotifyStepFailure" xml:space="preserve"><value>A termination step fails</value></data>
+  <data name="Button_SendTestEmail" xml:space="preserve"><value>Send test email</value></data>
+
+  <!-- Status messages (code-behind) -->
+  <data name="Msg_SettingsSaved" xml:space="preserve"><value>Settings saved.</value></data>
+  <data name="Msg_ConnectionStringParsed" xml:space="preserve"><value>Connection string parsed into fields.</value></data>
+  <data name="Msg_ConnectionSuccessful" xml:space="preserve"><value>Connection successful.</value></data>
+  <data name="Msg_ConnectionFailed" xml:space="preserve"><value>Connection failed.</value></data>
+  <data name="Msg_Connecting" xml:space="preserve"><value>Connecting...</value></data>
+  <data name="Msg_Reconnecting" xml:space="preserve"><value>Reconnecting...</value></data>
+  <data name="Msg_ConnectedSuccessfully" xml:space="preserve"><value>Connected successfully.</value></data>
+  <data name="Msg_Sending" xml:space="preserve"><value>Sending...</value></data>
+  <data name="Msg_TestEmailSent" xml:space="preserve"><value>Test email sent successfully.</value></data>
+  <data name="Msg_TestEmailFailed" xml:space="preserve"><value>Failed</value></data>
+  <data name="Msg_ProfileSaved" xml:space="preserve"><value>Profile saved.</value></data>
+  <data name="Msg_ProfileUnavailable_NoAd" xml:space="preserve"><value>Active Directory is unavailable. Your profile cannot be loaded.</value></data>
+  <data name="Msg_ProfileUnavailable_NoContext" xml:space="preserve"><value>Current user context is unavailable.</value></data>
+  <data name="Msg_ProfileUnavailable_NoAd_Short" xml:space="preserve"><value>Active Directory is unavailable.</value></data>
+  <data name="Msg_ProfileUnavailable_NoLoaded" xml:space="preserve"><value>Your profile is not loaded.</value></data>
+  <data name="Msg_ProfileEditUnavailable" xml:space="preserve"><value>Editing is unavailable because protected directory context could not be loaded.</value></data>
+  <data name="Msg_Preparing" xml:space="preserve"><value>Preparing...</value></data>
+  <data name="Msg_AdConnectionError_Title" xml:space="preserve"><value>AD Connection Error</value></data>
+  <data name="Msg_AdConnectionError_Body" xml:space="preserve"><value>Failed to connect to Active Directory</value></data>
+  <data name="Msg_AdConnectionError_Suffix" xml:space="preserve"><value>The app started without an AD connection.</value></data>
+
+  <!-- FireUser dialog -->
+  <data name="Dialog_Terminate_Title" xml:space="preserve"><value>Terminate User</value></data>
+  <data name="Terminate_ReasonLabel" xml:space="preserve"><value>Reason for offboarding</value></data>
+  <data name="Terminate_Reason_Resignation" xml:space="preserve"><value>Resignation</value></data>
+  <data name="Terminate_Reason_Dismissal" xml:space="preserve"><value>Termination / Dismissal</value></data>
+  <data name="Terminate_Reason_ContractEnded" xml:space="preserve"><value>Contract ended</value></data>
+  <data name="Terminate_Reason_Retirement" xml:space="preserve"><value>Retirement</value></data>
+  <data name="Terminate_Reason_Redundancy" xml:space="preserve"><value>Redundancy / Layoff</value></data>
+  <data name="Terminate_Reason_Transfer" xml:space="preserve"><value>Internal transfer</value></data>
+  <data name="Terminate_Reason_Other" xml:space="preserve"><value>Other</value></data>
+  <data name="Terminate_Step1" xml:space="preserve"><value>1. Disable the user account</value></data>
+  <data name="Terminate_Step2" xml:space="preserve"><value>2. Move to the disabled OU</value></data>
+  <data name="Terminate_Step3" xml:space="preserve"><value>3. Change password (generated automatically)</value></data>
+  <data name="Terminate_Step4" xml:space="preserve"><value>4. Remove from all groups</value></data>
+  <data name="Terminate_Step5" xml:space="preserve"><value>5. Set account expiration date</value></data>
+  <data name="Terminate_Step6" xml:space="preserve"><value>6. Export data before removal</value></data>
+  <data name="Terminate_ExportFormat" xml:space="preserve"><value>Format:</value></data>
+  <data name="Terminate_ExportPath" xml:space="preserve"><value>Path:</value></data>
+  <data name="Terminate_ExportGroups" xml:space="preserve"><value>Group memberships</value></data>
+  <data name="Terminate_ExportPermissions" xml:space="preserve"><value>Permissions</value></data>
+
+  <!-- TerminationProgress dialog -->
+  <data name="Dialog_Termination_Title" xml:space="preserve"><value>Termination</value></data>
+  <data name="Button_RevertChanges" xml:space="preserve"><value>Revert changes</value></data>
+
+  <!-- RollbackProgress dialog -->
+  <data name="Dialog_Rollback_Title" xml:space="preserve"><value>Rollback</value></data>
+  <data name="Restore_PasswordWarning" xml:space="preserve"><value>Warning: the password will not be restored because it was replaced with a random one. Set a new password manually.</value></data>
+  <data name="Button_StartRestore" xml:space="preserve"><value>Start restore</value></data>
+
+  <!-- TerminationConfirmation dialog -->
+  <data name="Dialog_ConfirmTermination_Question" xml:space="preserve"><value>Are you sure you want to terminate this user?</value></data>
+  <data name="Dialog_ActionsToPerform" xml:space="preserve"><value>The following actions will be performed:</value></data>
+  <data name="Button_YesTerminate" xml:space="preserve"><value>Yes, terminate</value></data>
+
+  <!-- DeleteUser dialog -->
+  <data name="Dialog_DeleteUser_Title" xml:space="preserve"><value>Delete user?</value></data>
+  <data name="Dialog_DeleteUser_Body" xml:space="preserve"><value>This action permanently removes the account from Active Directory.</value></data>
+
+  <!-- ResetPassword dialog -->
+  <data name="Dialog_ResetPassword_Body" xml:space="preserve"><value>A strong temporary password will be generated and applied to the selected Active Directory user.</value></data>
+  <data name="Dialog_ResetPassword_ActionTitle" xml:space="preserve"><value>This action will:</value></data>
+  <data name="Dialog_ResetPassword_Action1" xml:space="preserve"><value>• Generate a new temporary password</value></data>
+  <data name="Dialog_ResetPassword_Action2" xml:space="preserve"><value>• Reset the user's current password in Active Directory</value></data>
+  <data name="Dialog_ResetPassword_Action3" xml:space="preserve"><value>• Force the user to change it at next sign-in</value></data>
+  <data name="Dialog_ResetPassword_Action4" xml:space="preserve"><value>• Leave lockout state unchanged</value></data>
+  <data name="Dialog_ResetPassword_ForceChange" xml:space="preserve"><value>Force password change at next sign-in</value></data>
+
+  <!-- EditUser dialog -->
+  <data name="Dialog_EditUser_Title" xml:space="preserve"><value>Edit User</value></data>
+  <data name="Dialog_EditUser_Body" xml:space="preserve"><value>Update the core account information, location, status, and group membership.</value></data>
+  <data name="Hint_EditDisplayName" xml:space="preserve"><value>Username cannot be changed. Display Name and CN will be renamed from the first and last name.</value></data>
+
+  <!-- CreateUser dialog -->
+  <data name="Dialog_CreateUser_Title" xml:space="preserve"><value>Create New User</value></data>
+  <data name="Dialog_CreateUser_Body" xml:space="preserve"><value>Creates an active AD account with a generated password and a forced password change on first sign-in.</value></data>
+  <data name="Label_GroupSearch" xml:space="preserve"><value>Group search</value></data>
+  <data name="Label_SelectedGroups" xml:space="preserve"><value>Selected groups</value></data>
+  <data name="Placeholder_GroupSearch" xml:space="preserve"><value>Start typing a group name</value></data>
+  <data name="Hint_GroupSearch" xml:space="preserve"><value>Start typing to find groups.</value></data>
+  <data name="Hint_DisplayName" xml:space="preserve"><value>Display Name and CN will be generated from the first and last name.</value></data>
+  <data name="Button_AddGroup" xml:space="preserve"><value>Add selected group</value></data>
+  <data name="Button_RemoveGroup" xml:space="preserve"><value>Remove selected group</value></data>
+  <data name="Button_Create" xml:space="preserve"><value>Create</value></data>
+
+  <!-- Credentials dialogs -->
+  <data name="Dialog_Credentials_CopyHint" xml:space="preserve"><value>Copy this temporary password and share it through a secure channel. It will not be shown again.</value></data>
+  <data name="Dialog_NewUser_CopyHint" xml:space="preserve"><value>Copy these credentials and share them with the new user through a secure channel.</value></data>
+  <data name="Button_CopyCredentials" xml:space="preserve"><value>Copy credentials</value></data>
+  <data name="Dialog_AdditionalInfo" xml:space="preserve"><value>Additional information</value></data>
+
+  <!-- Restore page (code-behind strings) -->
+  <data name="Restore_NoMatch" xml:space="preserve"><value>No records match your search.</value></data>
+  <data name="Restore_SelectRecord_Body" xml:space="preserve"><value>Select a record from the table to view full details.</value></data>
+  <data name="Restore_Loading" xml:space="preserve"><value>Loading...</value></data>
+  <data name="Restore_DbNoRecords" xml:space="preserve"><value>No database records yet. User states are saved during termination.</value></data>
+  <data name="Restore_DbNoMatch" xml:space="preserve"><value>No records matched "{0}".</value></data>
+  <data name="Restore_SubHeader" xml:space="preserve"><value>{0} | captured {1}</value></data>
+  <data name="Restore_IdentityNote_Local" xml:space="preserve"><value>{0} | restore source: local</value></data>
+  <data name="Restore_IdentityNote_Remote" xml:space="preserve"><value>{0} | restore source: remote</value></data>
+  <data name="Value_GroupsFromSnapshot" xml:space="preserve"><value>Groups load from snapshot during restore</value></data>
+  <data name="Msg_Restore_AdUnavailable" xml:space="preserve"><value>AD service is unavailable. Restore is not available.</value></data>
+  <data name="Msg_Restore_DbServiceUnavailable" xml:space="preserve"><value>Database backup service is unavailable.</value></data>
+</root>

@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+
+  <!-- Navigation -->
+  <data name="Nav_Dashboard" xml:space="preserve"><value>Suvestinė</value></data>
+  <data name="Nav_Users" xml:space="preserve"><value>Vartotojai</value></data>
+  <data name="Nav_Restore" xml:space="preserve"><value>Atkūrimas</value></data>
+  <data name="Nav_ErrorLog" xml:space="preserve"><value>Klaidų žurnalas</value></data>
+  <data name="Nav_Settings" xml:space="preserve"><value>Nustatymai</value></data>
+
+  <!-- Status bar -->
+  <data name="Status_AdDisconnected" xml:space="preserve"><value>AD atjungtas</value></data>
+  <data name="Status_AdConnectedTo" xml:space="preserve"><value>Prisijungta prie</value></data>
+  <data name="Status_AdUnavailable" xml:space="preserve"><value>AD: nepasiekiamas</value></data>
+  <data name="Status_DbConnected" xml:space="preserve"><value>DB: prisijungta</value></data>
+  <data name="Status_DbUnavailable" xml:space="preserve"><value>DB: nepasiekiama</value></data>
+  <data name="Status_DbConnecting" xml:space="preserve"><value>DB: jungiamasi...</value></data>
+  <data name="Status_Users" xml:space="preserve"><value>Vartotojai</value></data>
+
+  <!-- Common buttons -->
+  <data name="Button_Save" xml:space="preserve"><value>Išsaugoti</value></data>
+  <data name="Button_Cancel" xml:space="preserve"><value>Atšaukti</value></data>
+  <data name="Button_Reset" xml:space="preserve"><value>Atstatyti</value></data>
+  <data name="Button_Refresh" xml:space="preserve"><value>Atnaujinti</value></data>
+  <data name="Button_Close" xml:space="preserve"><value>Uždaryti</value></data>
+  <data name="Button_Confirm" xml:space="preserve"><value>Patvirtinti</value></data>
+  <data name="Button_Clear" xml:space="preserve"><value>Išvalyti</value></data>
+  <data name="Button_Restore" xml:space="preserve"><value>Atkurti</value></data>
+  <data name="Button_Edit" xml:space="preserve"><value>Redaguoti</value></data>
+  <data name="Button_Delete" xml:space="preserve"><value>Ištrinti</value></data>
+
+  <!-- Common labels -->
+  <data name="Label_FirstName" xml:space="preserve"><value>Vardas</value></data>
+  <data name="Label_LastName" xml:space="preserve"><value>Pavardė</value></data>
+  <data name="Label_Email" xml:space="preserve"><value>El. paštas</value></data>
+  <data name="Label_Username" xml:space="preserve"><value>Vartotojo vardas</value></data>
+  <data name="Label_Department" xml:space="preserve"><value>Skyrius</value></data>
+  <data name="Label_JobTitle" xml:space="preserve"><value>Pareigos</value></data>
+  <data name="Label_Description" xml:space="preserve"><value>Aprašymas</value></data>
+  <data name="Label_PrimaryEmail" xml:space="preserve"><value>Pagrindinis el. paštas</value></data>
+  <data name="Label_AccountStatus" xml:space="preserve"><value>Paskyros būsena</value></data>
+  <data name="Label_OrganizationalUnit" xml:space="preserve"><value>Organizacinis vienetas</value></data>
+  <data name="Label_DistinguishedName" xml:space="preserve"><value>Išskirtinis pavadinimas</value></data>
+  <data name="Label_GroupMemberships" xml:space="preserve"><value>Grupės narystės</value></data>
+  <data name="Label_LastSignIn" xml:space="preserve"><value>Paskutinis prisijungimas</value></data>
+  <data name="Label_PasswordUpdated" xml:space="preserve"><value>Slaptažodis atnaujintas</value></data>
+  <data name="Label_CurrentState" xml:space="preserve"><value>Dabartinė būsena</value></data>
+  <data name="Label_AccountEnabled" xml:space="preserve"><value>Paskyra įjungta</value></data>
+  <data name="Label_Locked" xml:space="preserve"><value>Užblokuota</value></data>
+  <data name="Label_Location" xml:space="preserve"><value>Vieta</value></data>
+  <data name="Label_Name" xml:space="preserve"><value>Vardas</value></data>
+  <data name="Label_Captured" xml:space="preserve"><value>Užfiksuota</value></data>
+  <data name="Label_CapturedBy" xml:space="preserve"><value>Užfiksavo</value></data>
+  <data name="Label_CreatedBy" xml:space="preserve"><value>Sukūrė</value></data>
+  <data name="Label_Expiration" xml:space="preserve"><value>Galiojimo pabaiga</value></data>
+  <data name="Label_DirectoryPlacement" xml:space="preserve"><value>Katalogo vieta</value></data>
+  <data name="Label_PasswordLastChanged" xml:space="preserve"><value>Paskutinis slaptažodžio keitimas</value></data>
+  <data name="Label_Server" xml:space="preserve"><value>Serveris / kopija:</value></data>
+  <data name="Label_Port" xml:space="preserve"><value>Prievadas:</value></data>
+  <data name="Label_CompanyName" xml:space="preserve"><value>Įmonės pavadinimas:</value></data>
+  <data name="Label_DomainName" xml:space="preserve"><value>Domeno pavadinimas:</value></data>
+  <data name="Label_Format" xml:space="preserve"><value>Formatas:</value></data>
+  <data name="Label_Path" xml:space="preserve"><value>Kelias:</value></data>
+  <data name="Label_Permissions" xml:space="preserve"><value>Leidimai</value></data>
+  <data name="Label_Database" xml:space="preserve"><value>Duomenų bazė:</value></data>
+  <data name="Label_User" xml:space="preserve"><value>Vartotojas:</value></data>
+  <data name="Label_Password" xml:space="preserve"><value>Slaptažodis:</value></data>
+  <data name="Label_ConnectionString" xml:space="preserve"><value>Ryšio eilutė:</value></data>
+  <data name="Label_ConnectionString_Hint" xml:space="preserve"><value>Įklijuokite pilną ryšio eilutę, kuri perrašys aukščiau esančius laukus. Spustelėkite „Išskaidyti", kad reikšmės būtų ištrauktos į laukus.</value></data>
+  <data name="Btn_ParseConnectionString" xml:space="preserve"><value>Išskaidyti į laukus</value></data>
+
+  <!-- Common sections -->
+  <data name="Section_Identity" xml:space="preserve"><value>Tapatybė</value></data>
+  <data name="Section_Actions" xml:space="preserve"><value>Veiksmai</value></data>
+  <data name="Section_Groups" xml:space="preserve"><value>Grupės</value></data>
+  <data name="Section_Description" xml:space="preserve"><value>Aprašymas</value></data>
+  <data name="Section_SecurityTimeline" xml:space="preserve"><value>Saugumo laiko juosta</value></data>
+  <data name="Section_StateSnapshot" xml:space="preserve"><value>Būsenos momentinė kopija</value></data>
+  <data name="Section_RestoreMetadata" xml:space="preserve"><value>Atkūrimo metaduomenys</value></data>
+  <data name="Section_DistinguishedName" xml:space="preserve"><value>Išskirtinis pavadinimas</value></data>
+  <data name="Section_ProfilePlacement" xml:space="preserve"><value>Profilis ir vieta</value></data>
+
+  <!-- Column headers -->
+  <data name="Column_Name" xml:space="preserve"><value>Vardas</value></data>
+  <data name="Column_Username" xml:space="preserve"><value>Vartotojo vardas</value></data>
+  <data name="Column_Email" xml:space="preserve"><value>El. paštas</value></data>
+  <data name="Column_Status" xml:space="preserve"><value>Būsena</value></data>
+  <data name="Column_LastSignIn" xml:space="preserve"><value>Paskutinis prisijungimas</value></data>
+  <data name="Column_Location" xml:space="preserve"><value>Vieta</value></data>
+  <data name="Column_GroupCount" xml:space="preserve"><value>Grupių skaičius</value></data>
+  <data name="Column_Captured" xml:space="preserve"><value>Užfiksuota</value></data>
+  <data name="Column_CapturedBy" xml:space="preserve"><value>Užfiksavo</value></data>
+  <data name="Column_Time" xml:space="preserve"><value>Laikas</value></data>
+  <data name="Column_Source" xml:space="preserve"><value>Šaltinis</value></data>
+  <data name="Column_Message" xml:space="preserve"><value>Pranešimas</value></data>
+  <data name="Column_ID" xml:space="preserve"><value>ID</value></data>
+  <data name="Column_TerminatedOn" xml:space="preserve"><value>Atleista</value></data>
+  <data name="Column_PerformedBy" xml:space="preserve"><value>Atliko</value></data>
+  <data name="Column_Actions" xml:space="preserve"><value>Veiksmai</value></data>
+  <data name="Column_Step" xml:space="preserve"><value>Žingsnis</value></data>
+  <data name="Column_ResetBy" xml:space="preserve"><value>Atstatė</value></data>
+  <data name="Column_When" xml:space="preserve"><value>Kada</value></data>
+  <data name="Column_ForceChange" xml:space="preserve"><value>Priverstinis keitimas</value></data>
+  <data name="Column_DN" xml:space="preserve"><value>DN</value></data>
+  <data name="Search_PasswordReset_Placeholder" xml:space="preserve"><value>Ieškoti slaptažodžių atstatymo istorijoje...</value></data>
+
+  <!-- Status values -->
+  <data name="UserStatus_Active" xml:space="preserve"><value>Aktyvus</value></data>
+  <data name="UserStatus_Disabled" xml:space="preserve"><value>Išjungtas</value></data>
+  <data name="UserStatus_Locked" xml:space="preserve"><value>Užblokuotas</value></data>
+  <data name="Value_Never" xml:space="preserve"><value>Niekada</value></data>
+  <data name="Value_Yes" xml:space="preserve"><value>Taip</value></data>
+  <data name="Value_No" xml:space="preserve"><value>Ne</value></data>
+  <data name="Value_NoGroups" xml:space="preserve"><value>Nėra grupių</value></data>
+  <data name="Value_OneGroup" xml:space="preserve"><value>1 grupė</value></data>
+  <data name="Value_NoGroupsFound" xml:space="preserve"><value>Grupių nerasta</value></data>
+  <data name="Value_NGroups" xml:space="preserve"><value>{0} grupių</value></data>
+  <data name="Value_NoDepartment" xml:space="preserve"><value>Nėra skyriaus</value></data>
+  <data name="Value_TitleUnavailable" xml:space="preserve"><value>pareigos nenurodytos</value></data>
+  <data name="Value_NoTitle" xml:space="preserve"><value>Nėra pareigų</value></data>
+
+  <!-- Filter options -->
+  <data name="Filter_Status" xml:space="preserve"><value>Būsena</value></data>
+  <data name="Filter_OrganizationalUnit" xml:space="preserve"><value>Organizacinis vienetas</value></data>
+  <data name="Filter_LastSignIn" xml:space="preserve"><value>Paskutinis prisijungimas</value></data>
+  <data name="Filter_PasswordUpdated" xml:space="preserve"><value>Slaptažodis atnaujintas</value></data>
+  <data name="Filter_All" xml:space="preserve"><value>Visi</value></data>
+  <data name="Filter_Active" xml:space="preserve"><value>Aktyvūs</value></data>
+  <data name="Filter_Disabled" xml:space="preserve"><value>Išjungti</value></data>
+  <data name="Filter_Locked" xml:space="preserve"><value>Užblokuoti</value></data>
+  <data name="Filter_AnyTime" xml:space="preserve"><value>Bet kada</value></data>
+  <data name="Filter_Last7Days" xml:space="preserve"><value>Paskutinės 7 dienos</value></data>
+  <data name="Filter_Last30Days" xml:space="preserve"><value>Paskutinės 30 dienų</value></data>
+  <data name="Filter_Last90Days" xml:space="preserve"><value>Paskutinės 90 dienų</value></data>
+  <data name="Filter_Over90Days" xml:space="preserve"><value>Daugiau nei 90 dienų</value></data>
+  <data name="Filter_Over180Days" xml:space="preserve"><value>Daugiau nei 180 dienų</value></data>
+  <data name="Filter_Over1Year" xml:space="preserve"><value>Daugiau nei 1 metai</value></data>
+  <data name="Filter_NeverSignedIn" xml:space="preserve"><value>Niekada neprisijungė</value></data>
+  <data name="Filter_NeverUpdated" xml:space="preserve"><value>Niekada neatnaujintas</value></data>
+
+  <!-- Dashboard page -->
+  <data name="Page_Dashboard_Title" xml:space="preserve"><value>Administratoriaus suvestinė</value></data>
+  <data name="Dashboard_AdStatus" xml:space="preserve"><value>AD būsena</value></data>
+  <data name="Dashboard_Database" xml:space="preserve"><value>Duomenų bazė</value></data>
+  <data name="Dashboard_RecentBackups" xml:space="preserve"><value>Naujausi atsarginiai kopijavimai</value></data>
+  <data name="Dashboard_Last7Days" xml:space="preserve"><value>Paskutinės 7 dienos</value></data>
+  <data name="Dashboard_RestoreCoverage" xml:space="preserve"><value>Atkūrimo aprėptis</value></data>
+  <data name="Dashboard_TotalUsers" xml:space="preserve"><value>Vartotojų iš viso</value></data>
+  <data name="Dashboard_Active" xml:space="preserve"><value>Aktyvūs</value></data>
+  <data name="Dashboard_DisabledLocked" xml:space="preserve"><value>Išjungti / užblokuoti</value></data>
+  <data name="Dashboard_AttentionRequired" xml:space="preserve"><value>Reikia dėmesio</value></data>
+  <data name="Dashboard_QuickActions" xml:space="preserve"><value>Greiti veiksmai</value></data>
+  <data name="Dashboard_OpenUsers" xml:space="preserve"><value>Atidaryti vartotojus</value></data>
+  <data name="Dashboard_CreateUser" xml:space="preserve"><value>Pridėti vartotoją</value></data>
+  <data name="Dashboard_OpenRestore" xml:space="preserve"><value>Atidaryti atkūrimą</value></data>
+  <data name="Dashboard_OpenHistory" xml:space="preserve"><value>Atidaryti istoriją</value></data>
+  <data name="Dashboard_ErrorLog" xml:space="preserve"><value>Klaidų žurnalas</value></data>
+  <data name="Dashboard_LastUpdated" xml:space="preserve"><value>Atnaujinta</value></data>
+  <data name="Dashboard_Connected" xml:space="preserve"><value>Prisijungta</value></data>
+  <data name="Dashboard_Unavailable" xml:space="preserve"><value>Nepasiekiama</value></data>
+  <data name="Dashboard_DomainNotDetected" xml:space="preserve"><value>Domenas: neaptiktas</value></data>
+  <data name="Dashboard_Domain" xml:space="preserve"><value>Domenas: {0}</value></data>
+  <data name="Dashboard_Company" xml:space="preserve"><value>Įmonė: {0}</value></data>
+  <data name="Dashboard_CoverageSummary" xml:space="preserve"><value>{0} vietiniai / {1} atkurti</value></data>
+  <data name="Dashboard_ErrorsInSession" xml:space="preserve"><value>Klaidos sesijoje: {0}</value></data>
+  <data name="Dashboard_InactiveThreshold" xml:space="preserve"><value>Neaktyvūs &gt; {0} dienų</value></data>
+  <data name="Dashboard_NoAlerts" xml:space="preserve"><value>Nėra aktyvių įspėjimų.</value></data>
+  <data name="Dashboard_AlertSeverityOk" xml:space="preserve"><value>Gerai</value></data>
+
+  <!-- Users page -->
+  <data name="Search_Users_Placeholder" xml:space="preserve"><value>Ieškoti vartotojų...</value></data>
+  <data name="Button_RestoreFromFile" xml:space="preserve"><value>Atkurti iš failo</value></data>
+  <data name="Button_AddUser" xml:space="preserve"><value>Pridėti vartotoją</value></data>
+  <data name="Button_ClearFilters" xml:space="preserve"><value>Išvalyti filtrus</value></data>
+  <data name="Button_ResetPassword" xml:space="preserve"><value>Atstatyti slaptažodį</value></data>
+  <data name="Button_Terminate" xml:space="preserve"><value>Atleisti</value></data>
+  <data name="Users_SelectUser_Title" xml:space="preserve"><value>Pasirinkite vartotoją</value></data>
+  <data name="Users_SelectUser_Body" xml:space="preserve"><value>Pasirinkite paskyrą iš lentelės, kad peržiūrėtumėte tapatybę, katalogo vietą, saugumo laiko žymes, grupių narystes ir galimus veiksmus.</value></data>
+  <data name="Users_NoMatch_Title" xml:space="preserve"><value>Vartotojų nerasta pagal pasirinktus filtrus</value></data>
+  <data name="Users_NoMatch_Body" xml:space="preserve"><value>Pakeiskite paieškos tekstą arba išvalykite vieną ar kelis filtrus, kad matytumėte atitinkamas paskyras.</value></data>
+  <data name="Users_NoUsers_Title" xml:space="preserve"><value>Vartotojų nerasta</value></data>
+  <data name="Users_NoUsers_Body" xml:space="preserve"><value>Pabandykite kitą paieškos terminą arba atnaujinkite lentelę, kad užkrautumėte paskyras.</value></data>
+  <data name="Users_Actions_Hint" xml:space="preserve"><value>Valdykite pasirinktą paskyrą tiesiogiai iš šio skydelio.</value></data>
+
+  <!-- Restore page -->
+  <data name="Page_Restore_Title" xml:space="preserve"><value>Atkūrimas</value></data>
+  <data name="Restore_Tab_Local" xml:space="preserve"><value>Vietinis</value></data>
+  <data name="Restore_Tab_Remote" xml:space="preserve"><value>Nuotolinis</value></data>
+  <data name="Restore_SelectRecord_Title" xml:space="preserve"><value>Pasirinkite atkūrimo įrašą</value></data>
+  <data name="Restore_NoSavedChanges" xml:space="preserve"><value>Dar nėra išsaugotų pakeitimų. Vartotojų būsenos užfiksuojamos automatiškai atleidimo metu.</value></data>
+  <data name="Restore_DbConnecting" xml:space="preserve"><value>Jungiamasi prie duomenų bazės...</value></data>
+  <data name="Restore_Actions_Hint_Local" xml:space="preserve"><value>Atkurkite pasirinktą vartotojo būseną tiesiogiai iš šio skydelio.</value></data>
+  <data name="Restore_Actions_Hint_Remote" xml:space="preserve"><value>Atkurkite pasirinktą vartotojo būseną tiesiogiai iš šio skydelio. Nuotoliniai įrašai archyvuojami po sėkmingo atkūrimo.</value></data>
+  <data name="Button_RestoreUser" xml:space="preserve"><value>Atkurti vartotoją</value></data>
+  <data name="Search_Placeholder" xml:space="preserve"><value>Ieškoti...</value></data>
+
+  <!-- History page -->
+  <data name="Search_History_Placeholder" xml:space="preserve"><value>Ieškoti istorijoje...</value></data>
+  <data name="Button_RestoreHistory" xml:space="preserve"><value>Atkurti</value></data>
+  <data name="History_StatusTerminated" xml:space="preserve"><value>Atleistas</value></data>
+  <data name="History_StatusRestored" xml:space="preserve"><value>Atkurtas ({0})</value></data>
+  <data name="History_StatusDeleted" xml:space="preserve"><value>Ištrintas ({0})</value></data>
+  <data name="History_StatusUnavailable" xml:space="preserve"><value>Nepasiekiama</value></data>
+  <data name="History_StepDisabled" xml:space="preserve"><value>Išjungtas</value></data>
+  <data name="History_StepMoved" xml:space="preserve"><value>Perkeltas</value></data>
+  <data name="History_StepPassword" xml:space="preserve"><value>Slaptažodis</value></data>
+  <data name="History_StepGroups" xml:space="preserve"><value>Grupės</value></data>
+  <data name="History_StepExpiration" xml:space="preserve"><value>Galiojimas</value></data>
+  <data name="History_StepExport" xml:space="preserve"><value>Eksportas</value></data>
+  <data name="Msg_DbUnavailable" xml:space="preserve"><value>Duomenų bazė nepasiekiama</value></data>
+
+  <!-- Settings page -->
+  <data name="Page_Settings_Title" xml:space="preserve"><value>Nustatymai</value></data>
+  <data name="Settings_Tab_General" xml:space="preserve"><value>Bendrieji</value></data>
+  <data name="Settings_Tab_Profile" xml:space="preserve"><value>Mano profilis</value></data>
+  <data name="Settings_Tab_Database" xml:space="preserve"><value>Duomenų bazė</value></data>
+  <data name="Settings_Tab_Email" xml:space="preserve"><value>El. paštas</value></data>
+  <data name="Settings_Language_Title" xml:space="preserve"><value>Kalba</value></data>
+  <data name="Settings_Language_Label" xml:space="preserve"><value>Programos kalba:</value></data>
+  <data name="Settings_Language_Hint" xml:space="preserve"><value>Pakeitimai taikomi iš karto, nereikia paleisti programos iš naujo.</value></data>
+  <data name="Profile_ProtectedAccountDetails" xml:space="preserve"><value>Apsaugoti paskyros duomenys</value></data>
+  <data name="Profile_ProtectedMemberships" xml:space="preserve"><value>Apsaugotos narystės</value></data>
+  <data name="Profile_ProtectedMembershipsHint" xml:space="preserve"><value>Grupės ir vieta valdoma administratoriaus ir rodoma tik informaciniais tikslais.</value></data>
+  <data name="Profile_EditableDetails" xml:space="preserve"><value>Redaguojami profilio duomenys</value></data>
+  <data name="Profile_EditableDetailsHint_Settings" xml:space="preserve"><value>Forma optimizuota ilgesnėms pastaboms ir profilio kontekstui. Jautrios paskyros valdymo funkcijos užrakintos.</value></data>
+  <data name="Profile_EditableDetailsHint_Profile" xml:space="preserve"><value>Galite atnaujinti pagrindinę tapatybės ir kontaktinę informaciją. Jautrios paskyros valdymo funkcijos užrakintos.</value></data>
+  <data name="Profile_SaveChanges" xml:space="preserve"><value>Išsaugoti pakeitimus</value></data>
+  <data name="Profile_Unavailable_Title" xml:space="preserve"><value>Profilis nepasiekiamas</value></data>
+  <data name="Profile_Unavailable_Message" xml:space="preserve"><value>Prisijungusios paskyros nepavyko nustatyti.</value></data>
+  <data name="Db_Title" xml:space="preserve"><value>SQL Server duomenų bazė</value></data>
+  <data name="Db_HintText" xml:space="preserve"><value>Jungiasi prie SQL Server arba SQL Server Express paleidus programą. Vietiniam serveriui naudokite .\SQLEXPRESS arba localhost\SQLEXPRESS. Palikite vartotoją tuščią „Windows" autentifikacijai. Duomenų bazė sukuriama automatiškai, jei jos nėra.</value></data>
+  <data name="Db_CompanyNameHint" xml:space="preserve"><value>Nustato šią AD instanciją bendroje duomenų bazėje (kelių nuomininkų aplinkoje). Pagal numatytuosius nustatymus naudojamas „Windows" domeno pavadinimas.</value></data>
+  <data name="Button_TestConnection" xml:space="preserve"><value>Tikrinti ryšį</value></data>
+  <data name="Button_Reconnect" xml:space="preserve"><value>Prisijungti iš naujo</value></data>
+  <data name="Email_Title" xml:space="preserve"><value>El. pašto pranešimai</value></data>
+  <data name="Email_HintText" xml:space="preserve"><value>Sukonfigūruokite SMTP, kad gautumėte pranešimus, kai vartotojai atleidžiami arba atkuriami.</value></data>
+  <data name="Email_EnableNotifications" xml:space="preserve"><value>Įjungti pranešimus:</value></data>
+  <data name="Email_SmtpServer" xml:space="preserve"><value>SMTP serveris:</value></data>
+  <data name="Email_UseStartTls" xml:space="preserve"><value>Naudoti STARTTLS</value></data>
+  <data name="Email_SenderAddress" xml:space="preserve"><value>Siuntėjo adresas:</value></data>
+  <data name="Email_SenderName" xml:space="preserve"><value>Siuntėjo vardas:</value></data>
+  <data name="Email_SmtpUsername" xml:space="preserve"><value>SMTP vartotojo vardas:</value></data>
+  <data name="Email_SmtpPassword" xml:space="preserve"><value>SMTP slaptažodis:</value></data>
+  <data name="Email_Recipients" xml:space="preserve"><value>Gavėjai (po vieną eilutėje):</value></data>
+  <data name="Email_NotifyWhen" xml:space="preserve"><value>Siųsti pranešimus, kai:</value></data>
+  <data name="Email_NotifyTermination" xml:space="preserve"><value>Vartotojas atleistas</value></data>
+  <data name="Email_NotifyRollback" xml:space="preserve"><value>Atleidimas atšauktas</value></data>
+  <data name="Email_NotifyStepFailure" xml:space="preserve"><value>Atleidimo žingsnis nepavyko</value></data>
+  <data name="Button_SendTestEmail" xml:space="preserve"><value>Siųsti bandomąjį laišką</value></data>
+
+  <!-- Status messages (code-behind) -->
+  <data name="Msg_SettingsSaved" xml:space="preserve"><value>Nustatymai išsaugoti.</value></data>
+  <data name="Msg_ConnectionStringParsed" xml:space="preserve"><value>Ryšio eilutė išskaidyta į laukus.</value></data>
+  <data name="Msg_ConnectionSuccessful" xml:space="preserve"><value>Ryšys sėkmingas.</value></data>
+  <data name="Msg_ConnectionFailed" xml:space="preserve"><value>Ryšys nepavyko.</value></data>
+  <data name="Msg_Connecting" xml:space="preserve"><value>Jungiamasi...</value></data>
+  <data name="Msg_Reconnecting" xml:space="preserve"><value>Jungiamasi iš naujo...</value></data>
+  <data name="Msg_ConnectedSuccessfully" xml:space="preserve"><value>Prisijungta sėkmingai.</value></data>
+  <data name="Msg_Sending" xml:space="preserve"><value>Siunčiama...</value></data>
+  <data name="Msg_TestEmailSent" xml:space="preserve"><value>Bandomasis laiškas išsiųstas sėkmingai.</value></data>
+  <data name="Msg_TestEmailFailed" xml:space="preserve"><value>Nepavyko</value></data>
+  <data name="Msg_ProfileSaved" xml:space="preserve"><value>Profilis išsaugotas.</value></data>
+  <data name="Msg_ProfileUnavailable_NoAd" xml:space="preserve"><value>Active Directory nepasiekiamas. Jūsų profilio nepavyksta įkelti.</value></data>
+  <data name="Msg_ProfileUnavailable_NoContext" xml:space="preserve"><value>Dabartinio vartotojo kontekstas nepasiekiamas.</value></data>
+  <data name="Msg_ProfileUnavailable_NoAd_Short" xml:space="preserve"><value>Active Directory nepasiekiamas.</value></data>
+  <data name="Msg_ProfileUnavailable_NoLoaded" xml:space="preserve"><value>Jūsų profilis neįkeltas.</value></data>
+  <data name="Msg_ProfileEditUnavailable" xml:space="preserve"><value>Redagavimas nepasiekiamas, nes apsaugoto katalogo konteksto nepavyko įkelti.</value></data>
+  <data name="Msg_Preparing" xml:space="preserve"><value>Ruošiama...</value></data>
+  <data name="Msg_AdConnectionError_Title" xml:space="preserve"><value>AD prisijungimo klaida</value></data>
+  <data name="Msg_AdConnectionError_Body" xml:space="preserve"><value>Nepavyko prisijungti prie Active Directory</value></data>
+  <data name="Msg_AdConnectionError_Suffix" xml:space="preserve"><value>Programa paleista be AD ryšio.</value></data>
+
+  <!-- FireUser dialog -->
+  <data name="Dialog_Terminate_Title" xml:space="preserve"><value>Atleisti vartotoją</value></data>
+  <data name="Terminate_ReasonLabel" xml:space="preserve"><value>Atleidimo priežastis</value></data>
+  <data name="Terminate_Reason_Resignation" xml:space="preserve"><value>Savanoriškas pasitraukimas</value></data>
+  <data name="Terminate_Reason_Dismissal" xml:space="preserve"><value>Atleidimas / Nušalinimas</value></data>
+  <data name="Terminate_Reason_ContractEnded" xml:space="preserve"><value>Sutartis pasibaigė</value></data>
+  <data name="Terminate_Reason_Retirement" xml:space="preserve"><value>Išėjimas į pensiją</value></data>
+  <data name="Terminate_Reason_Redundancy" xml:space="preserve"><value>Etatų mažinimas</value></data>
+  <data name="Terminate_Reason_Transfer" xml:space="preserve"><value>Vidinis perkėlimas</value></data>
+  <data name="Terminate_Reason_Other" xml:space="preserve"><value>Kita</value></data>
+  <data name="Terminate_Step1" xml:space="preserve"><value>1. Išjungti vartotojo paskyrą</value></data>
+  <data name="Terminate_Step2" xml:space="preserve"><value>2. Perkelti į išjungtų OU</value></data>
+  <data name="Terminate_Step3" xml:space="preserve"><value>3. Pakeisti slaptažodį (sugeneruojamas automatiškai)</value></data>
+  <data name="Terminate_Step4" xml:space="preserve"><value>4. Pašalinti iš visų grupių</value></data>
+  <data name="Terminate_Step5" xml:space="preserve"><value>5. Nustatyti paskyros galiojimo pabaigos datą</value></data>
+  <data name="Terminate_Step6" xml:space="preserve"><value>6. Eksportuoti duomenis prieš pašalinimą</value></data>
+  <data name="Terminate_ExportFormat" xml:space="preserve"><value>Formatas:</value></data>
+  <data name="Terminate_ExportPath" xml:space="preserve"><value>Kelias:</value></data>
+  <data name="Terminate_ExportGroups" xml:space="preserve"><value>Grupių narystės</value></data>
+  <data name="Terminate_ExportPermissions" xml:space="preserve"><value>Leidimai</value></data>
+
+  <!-- TerminationProgress dialog -->
+  <data name="Dialog_Termination_Title" xml:space="preserve"><value>Atleidimas</value></data>
+  <data name="Button_RevertChanges" xml:space="preserve"><value>Atšaukti pakeitimus</value></data>
+
+  <!-- RollbackProgress dialog -->
+  <data name="Dialog_Rollback_Title" xml:space="preserve"><value>Atšaukimas</value></data>
+  <data name="Restore_PasswordWarning" xml:space="preserve"><value>Įspėjimas: slaptažodis nebus atkurtas, nes jis buvo pakeistas atsitiktiniu. Nustatykite naują slaptažodį rankiniu būdu.</value></data>
+  <data name="Button_StartRestore" xml:space="preserve"><value>Pradėti atkūrimą</value></data>
+
+  <!-- TerminationConfirmation dialog -->
+  <data name="Dialog_ConfirmTermination_Question" xml:space="preserve"><value>Ar tikrai norite atleisti šį vartotoją?</value></data>
+  <data name="Dialog_ActionsToPerform" xml:space="preserve"><value>Bus atlikti šie veiksmai:</value></data>
+  <data name="Button_YesTerminate" xml:space="preserve"><value>Taip, atleisti</value></data>
+
+  <!-- DeleteUser dialog -->
+  <data name="Dialog_DeleteUser_Title" xml:space="preserve"><value>Ištrinti vartotoją?</value></data>
+  <data name="Dialog_DeleteUser_Body" xml:space="preserve"><value>Šis veiksmas negrįžtamai pašalins paskyrą iš Active Directory.</value></data>
+
+  <!-- ResetPassword dialog -->
+  <data name="Dialog_ResetPassword_Body" xml:space="preserve"><value>Bus sugeneruotas ir pritaikytas stiprus laikinas slaptažodis pasirinktam Active Directory vartotojui.</value></data>
+  <data name="Dialog_ResetPassword_ActionTitle" xml:space="preserve"><value>Šis veiksmas:</value></data>
+  <data name="Dialog_ResetPassword_Action1" xml:space="preserve"><value>• Sugeneruos naują laikiną slaptažodį</value></data>
+  <data name="Dialog_ResetPassword_Action2" xml:space="preserve"><value>• Atstatys vartotojo dabartinį slaptažodį Active Directory</value></data>
+  <data name="Dialog_ResetPassword_Action3" xml:space="preserve"><value>• Privers vartotoją jį pakeisti kito prisijungimo metu</value></data>
+  <data name="Dialog_ResetPassword_Action4" xml:space="preserve"><value>• Nepalies užblokavimo būsenos</value></data>
+  <data name="Dialog_ResetPassword_ForceChange" xml:space="preserve"><value>Priverstinis slaptažodžio keitimas kito prisijungimo metu</value></data>
+
+  <!-- EditUser dialog -->
+  <data name="Dialog_EditUser_Title" xml:space="preserve"><value>Redaguoti vartotoją</value></data>
+  <data name="Dialog_EditUser_Body" xml:space="preserve"><value>Atnaujinkite pagrindinę paskyros informaciją, vietą, būseną ir grupių narystę.</value></data>
+  <data name="Hint_EditDisplayName" xml:space="preserve"><value>Vartotojo vardas negali būti keičiamas. Rodomas vardas ir CN bus pervadinti pagal vardą ir pavardę.</value></data>
+
+  <!-- CreateUser dialog -->
+  <data name="Dialog_CreateUser_Title" xml:space="preserve"><value>Sukurti naują vartotoją</value></data>
+  <data name="Dialog_CreateUser_Body" xml:space="preserve"><value>Sukuria aktyvią AD paskyrą su sugeneruotu slaptažodžiu ir priverstinu slaptažodžio keitimu pirmojo prisijungimo metu.</value></data>
+  <data name="Label_GroupSearch" xml:space="preserve"><value>Grupių paieška</value></data>
+  <data name="Label_SelectedGroups" xml:space="preserve"><value>Pasirinktos grupės</value></data>
+  <data name="Placeholder_GroupSearch" xml:space="preserve"><value>Pradėkite rinkti grupės pavadinimą</value></data>
+  <data name="Hint_GroupSearch" xml:space="preserve"><value>Pradėkite rinkti, kad rastumėte grupes.</value></data>
+  <data name="Hint_DisplayName" xml:space="preserve"><value>Rodomas vardas ir CN bus sugeneruoti iš vardo ir pavardės.</value></data>
+  <data name="Button_AddGroup" xml:space="preserve"><value>Pridėti pasirinktą grupę</value></data>
+  <data name="Button_RemoveGroup" xml:space="preserve"><value>Pašalinti pasirinktą grupę</value></data>
+  <data name="Button_Create" xml:space="preserve"><value>Sukurti</value></data>
+
+  <!-- Credentials dialogs -->
+  <data name="Dialog_Credentials_CopyHint" xml:space="preserve"><value>Nukopijuokite šį laikiną slaptažodį ir perduokite jį saugiu kanalu. Jis daugiau nebus rodomas.</value></data>
+  <data name="Dialog_NewUser_CopyHint" xml:space="preserve"><value>Nukopijuokite šiuos prisijungimo duomenis ir perduokite naujam vartotojui saugiu kanalu.</value></data>
+  <data name="Button_CopyCredentials" xml:space="preserve"><value>Kopijuoti duomenis</value></data>
+  <data name="Dialog_AdditionalInfo" xml:space="preserve"><value>Papildoma informacija</value></data>
+
+  <!-- Restore page (code-behind strings) -->
+  <data name="Restore_NoMatch" xml:space="preserve"><value>Nė vienas įrašas neatitinka paieškos.</value></data>
+  <data name="Restore_SelectRecord_Body" xml:space="preserve"><value>Pasirinkite įrašą iš lentelės norėdami peržiūrėti išsamią informaciją.</value></data>
+  <data name="Restore_Loading" xml:space="preserve"><value>Kraunama...</value></data>
+  <data name="Restore_DbNoRecords" xml:space="preserve"><value>Duomenų bazėje dar nėra įrašų. Vartotojų būsenos išsaugomos atleidimo metu.</value></data>
+  <data name="Restore_DbNoMatch" xml:space="preserve"><value>Nė vienas įrašas neatitiko „{0}".</value></data>
+  <data name="Restore_SubHeader" xml:space="preserve"><value>{0} | užfiksuota {1}</value></data>
+  <data name="Restore_IdentityNote_Local" xml:space="preserve"><value>{0} | atkūrimo šaltinis: vietinis</value></data>
+  <data name="Restore_IdentityNote_Remote" xml:space="preserve"><value>{0} | atkūrimo šaltinis: nuotolinis</value></data>
+  <data name="Value_GroupsFromSnapshot" xml:space="preserve"><value>Grupės kraunamos iš momentinės kopijos atkūrimo metu.</value></data>
+  <data name="Msg_Restore_AdUnavailable" xml:space="preserve"><value>AD paslauga nepasiekiama. Atkūrimas negalimas.</value></data>
+  <data name="Msg_Restore_DbServiceUnavailable" xml:space="preserve"><value>Duomenų bazės atsarginių kopijų paslauga nepasiekiama.</value></data>
+</root>

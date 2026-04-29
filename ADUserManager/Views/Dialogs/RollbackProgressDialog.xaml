@@ -1,0 +1,78 @@
+<Window x:Class="ActiveManager.Views.Dialogs.RollbackProgressDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:loc="clr-namespace:ActiveManager.Localization"
+    Title="Restore"
+    Width="640" Height="580"
+    WindowStartupLocation="CenterOwner"
+    ResizeMode="NoResize"
+    WindowStyle="SingleBorderWindow"
+    Background="{DynamicResource ApplicationBackgroundBrush}"
+    Foreground="{DynamicResource TextFillColorPrimaryBrush}">
+
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="160" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" x:Name="InfoText" Margin="0,0,0,8" LineHeight="22" />
+
+        <TextBlock Grid.Row="1"
+            Text="{Binding [Restore_PasswordWarning], Source={x:Static loc:TranslationSource.Instance}}"
+            FontStyle="Italic"
+            Foreground="DarkOrange"
+            TextWrapping="Wrap"
+            Margin="0,0,0,12" />
+
+        <DataGrid Grid.Row="2" x:Name="StepsList"
+            AutoGenerateColumns="False"
+            IsReadOnly="True"
+            SelectionMode="Single"
+            CanUserAddRows="False"
+            CanUserDeleteRows="False"
+            HeadersVisibility="Column"
+            GridLinesVisibility="Horizontal"
+            BorderThickness="1"
+            BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="{Binding [Column_Step], Source={x:Static loc:TranslationSource.Instance}}" Binding="{Binding Name}" Width="320" />
+                <DataGridTextColumn Header="{Binding [Column_Status], Source={x:Static loc:TranslationSource.Instance}}" Binding="{Binding Status}" Width="120" />
+                <DataGridTextColumn Header="{Binding [Column_Time], Source={x:Static loc:TranslationSource.Instance}}" Binding="{Binding Timestamp}" Width="130" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <TextBlock Grid.Row="3" x:Name="StatusLabel"
+            Text="Ready to restore..."
+            FontWeight="SemiBold"
+            Margin="0,8,0,4" />
+
+        <TextBox Grid.Row="4" x:Name="LogText"
+            IsReadOnly="True"
+            TextWrapping="Wrap"
+            VerticalScrollBarVisibility="Auto"
+            FontFamily="Consolas"
+            FontSize="11"
+            Background="{DynamicResource ControlFillColorDefaultBrush}"
+            Foreground="#004D40"
+            BorderThickness="1"
+            BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+            Padding="8" />
+
+        <StackPanel Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,8,0,0">
+            <ui:Button x:Name="StartButton" Content="{Binding [Button_StartRestore], Source={x:Static loc:TranslationSource.Instance}}"
+                Style="{StaticResource SuccessButtonStyle}"
+                Click="OnStart"
+                Margin="0,0,8,0" />
+            <ui:Button x:Name="CloseButton" Content="{Binding [Button_Close], Source={x:Static loc:TranslationSource.Instance}}"
+                Style="{StaticResource SecondaryButtonStyle}"
+                Click="OnClose"
+                IsEnabled="False" />
+        </StackPanel>
+    </Grid>
+</Window>

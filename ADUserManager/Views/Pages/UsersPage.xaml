@@ -1,0 +1,457 @@
+<Page x:Class="ActiveManager.Views.Pages.UsersPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:loc="clr-namespace:ActiveManager.Localization">
+
+    <Page.Resources>
+        <LinearGradientBrush x:Key="DetailHeroBackgroundBrush" StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#F8FBFF" Offset="0" />
+            <GradientStop Color="#EEF6FB" Offset="0.55" />
+            <GradientStop Color="#F7F8FA" Offset="1" />
+        </LinearGradientBrush>
+
+        <SolidColorBrush x:Key="DetailHeroBorderBrush" Color="#D7E7F1" />
+        <SolidColorBrush x:Key="DetailAccentBrush" Color="#2B86A8" />
+        <SolidColorBrush x:Key="DetailAccentSoftBrush" Color="#E6F3F8" />
+        <SolidColorBrush x:Key="DetailMutedBrush" Color="#5F6B76" />
+
+        <Style x:Key="DetailCardStyle" TargetType="Border">
+            <Setter Property="Padding" Value="18" />
+            <Setter Property="CornerRadius" Value="12" />
+            <Setter Property="Background" Value="{DynamicResource ControlFillColorSecondaryBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Margin" Value="0,0,0,14" />
+        </Style>
+
+        <Style x:Key="DetailSectionHeaderStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
+            <Setter Property="Margin" Value="0,0,0,14" />
+        </Style>
+
+        <Style x:Key="DetailLabelStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="11" />
+            <Setter Property="Foreground" Value="{StaticResource DetailMutedBrush}" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="Margin" Value="0,0,0,4" />
+        </Style>
+
+        <Style x:Key="DetailValueStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="Margin" Value="0,0,0,14" />
+        </Style>
+
+        <Style x:Key="SummaryCardStyle" TargetType="Border" BasedOn="{StaticResource DetailCardStyle}">
+            <Setter Property="Padding" Value="12" />
+            <Setter Property="Margin" Value="0,0,12,12" />
+            <Setter Property="MinHeight" Value="76" />
+        </Style>
+    </Page.Resources>
+
+    <Grid Margin="24,16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Margin="0,0,0,12">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <ui:TextBox Grid.Column="0"
+                x:Name="SearchBox"
+                PlaceholderText="{Binding [Search_Users_Placeholder], Source={x:Static loc:TranslationSource.Instance}}"
+                Icon="{ui:SymbolIcon Search24}"
+                KeyDown="SearchBox_KeyDown"
+                TextChanged="SearchBox_TextChanged"
+                Margin="0,0,8,0" />
+
+            <ui:Button Grid.Column="1"
+                Content="{Binding [Button_Refresh], Source={x:Static loc:TranslationSource.Instance}}"
+                Style="{StaticResource ToolbarButtonStyle}"
+                Icon="{ui:SymbolIcon ArrowSync24}"
+                Click="OnRefresh"
+                Margin="0,0,4,0" />
+
+            <ui:Button Grid.Column="2"
+                Content="{Binding [Button_RestoreFromFile], Source={x:Static loc:TranslationSource.Instance}}"
+                Style="{StaticResource ToolbarButtonStyle}"
+                Icon="{ui:SymbolIcon ArrowUndo24}"
+                Click="OnRevertFromFile"
+                Margin="0,0,4,0" />
+
+            <ui:Button Grid.Column="3"
+                x:Name="AddUserToolbarButton"
+                Content="{Binding [Button_AddUser], Source={x:Static loc:TranslationSource.Instance}}"
+                Style="{StaticResource ToolbarButtonStyle}"
+                Icon="{ui:SymbolIcon PersonAdd24}"
+                Click="OnAddUser" />
+        </Grid>
+
+        <Border Grid.Row="1"
+            Margin="8,0,8,12"
+            Padding="16"
+            CornerRadius="12"
+            Background="{DynamicResource ControlFillColorSecondaryBrush}"
+            BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+            BorderThickness="1">
+            <DockPanel LastChildFill="True">
+                <ui:Button DockPanel.Dock="Right"
+                    Content="{Binding [Button_ClearFilters], Source={x:Static loc:TranslationSource.Instance}}"
+                    Style="{StaticResource ToolbarButtonStyle}"
+                    Click="OnClearFilters"
+                    Margin="12,0,0,0"
+                    VerticalAlignment="Top" />
+
+                <WrapPanel Orientation="Horizontal">
+                    <StackPanel Width="150" Margin="0,0,12,12">
+                        <TextBlock Text="{Binding [Filter_Status], Source={x:Static loc:TranslationSource.Instance}}"
+                            Margin="0,0,0,4"
+                            Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+                        <ComboBox x:Name="StatusFilterComboBox"
+                            SelectionChanged="OnFilterChanged" />
+                    </StackPanel>
+
+                    <StackPanel Width="260" Margin="0,0,12,12">
+                        <TextBlock Text="{Binding [Filter_OrganizationalUnit], Source={x:Static loc:TranslationSource.Instance}}"
+                            Margin="0,0,0,4"
+                            Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+                        <ComboBox x:Name="OuFilterComboBox"
+                            SelectionChanged="OnFilterChanged" />
+                    </StackPanel>
+
+                    <StackPanel Width="160" Margin="0,0,12,12">
+                        <TextBlock Text="{Binding [Filter_LastSignIn], Source={x:Static loc:TranslationSource.Instance}}"
+                            Margin="0,0,0,4"
+                            Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+                        <ComboBox x:Name="LastSignInFilterComboBox"
+                            SelectionChanged="OnFilterChanged" />
+                    </StackPanel>
+
+                    <StackPanel Width="170" Margin="0,0,0,12">
+                        <TextBlock Text="{Binding [Filter_PasswordUpdated], Source={x:Static loc:TranslationSource.Instance}}"
+                            Margin="0,0,0,4"
+                            Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+                        <ComboBox x:Name="PasswordUpdatedFilterComboBox"
+                            SelectionChanged="OnFilterChanged" />
+                    </StackPanel>
+                </WrapPanel>
+            </DockPanel>
+        </Border>
+
+        <DataGrid Grid.Row="2"
+            x:Name="UsersGrid"
+            AutoGenerateColumns="False"
+            IsReadOnly="True"
+            SelectionMode="Single"
+            CanUserAddRows="False"
+            CanUserDeleteRows="False"
+            HeadersVisibility="Column"
+            GridLinesVisibility="Horizontal"
+            BorderThickness="1"
+            BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+            SelectionChanged="OnUserSelected"
+            Margin="8,4,8,16"
+            MaxHeight="400"
+            VerticalScrollBarVisibility="Auto"
+            HorizontalScrollBarVisibility="Disabled">
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="{Binding [Column_Name], Source={x:Static loc:TranslationSource.Instance}}" Binding="{Binding DisplayName}" Width="2*" />
+                <DataGridTextColumn Header="{Binding [Column_Username], Source={x:Static loc:TranslationSource.Instance}}" Binding="{Binding SamAccountName}" Width="1.5*" />
+                <DataGridTextColumn Header="{Binding [Column_Email], Source={x:Static loc:TranslationSource.Instance}}" Binding="{Binding Email}" Width="2*" />
+                <DataGridTextColumn Header="{Binding [Column_Status], Source={x:Static loc:TranslationSource.Instance}}" Binding="{Binding StatusText}" Width="Auto" MinWidth="80" />
+                <DataGridTextColumn Header="{Binding [Column_LastSignIn], Source={x:Static loc:TranslationSource.Instance}}" Binding="{Binding LastLogonText}" Width="1.5*" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Border Grid.Row="3"
+            x:Name="UserDetailsPanel"
+            Visibility="Collapsed"
+            Background="{DynamicResource ControlFillColorDefaultBrush}"
+            BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+            BorderThickness="1"
+            CornerRadius="14"
+            Padding="22">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Border Grid.Row="0"
+                    Background="{StaticResource DetailHeroBackgroundBrush}"
+                    BorderBrush="{StaticResource DetailHeroBorderBrush}"
+                    BorderThickness="1"
+                    CornerRadius="16"
+                    Padding="18"
+                    Margin="0,0,0,14">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="520" />
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0" Margin="0,0,22,0" VerticalAlignment="Center">
+                            <TextBlock x:Name="DetailsHeader"
+                                FontSize="18"
+                                FontWeight="SemiBold"
+                                Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                            <TextBlock x:Name="DetailIdentitySubheader"
+                                Margin="0,4,0,0"
+                                FontSize="12"
+                                Foreground="{StaticResource DetailMutedBrush}"
+                                TextWrapping="Wrap" />
+                            <TextBlock x:Name="DetailIdentityNote"
+                                Margin="0,8,0,0"
+                                FontSize="12"
+                                Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                TextWrapping="Wrap" />
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                            <Border x:Name="DetailStatusBadgeBorder"
+                                HorizontalAlignment="Left"
+                                Padding="10,5"
+                                CornerRadius="4"
+                                BorderThickness="1">
+                                <TextBlock x:Name="DetailStatusBadgeText"
+                                    FontSize="11"
+                                    FontWeight="SemiBold" />
+                            </Border>
+
+                            <UniformGrid Margin="0,12,0,0" Columns="3">
+                                <Border Style="{StaticResource SummaryCardStyle}" Margin="0,0,12,0">
+                                    <StackPanel>
+                                        <TextBlock Style="{StaticResource DetailLabelStyle}" Text="{Binding [Label_GroupMemberships], Source={x:Static loc:TranslationSource.Instance}}" />
+                                        <TextBlock x:Name="DetailGroupCountSummary"
+                                            FontSize="14"
+                                            FontWeight="SemiBold" />
+                                    </StackPanel>
+                                </Border>
+
+                                <Border Style="{StaticResource SummaryCardStyle}" Margin="0,0,12,0">
+                                    <StackPanel>
+                                        <TextBlock Style="{StaticResource DetailLabelStyle}" Text="{Binding [Label_LastSignIn], Source={x:Static loc:TranslationSource.Instance}}" />
+                                        <TextBlock x:Name="DetailLastLogonSummary"
+                                            FontSize="12"
+                                            FontWeight="SemiBold"
+                                            TextWrapping="Wrap" />
+                                    </StackPanel>
+                                </Border>
+
+                                <Border Style="{StaticResource SummaryCardStyle}" Margin="0,0,0,0">
+                                    <StackPanel>
+                                        <TextBlock Style="{StaticResource DetailLabelStyle}" Text="{Binding [Label_PasswordUpdated], Source={x:Static loc:TranslationSource.Instance}}" />
+                                        <TextBlock x:Name="DetailPasswordLastSetSummary"
+                                            FontSize="12"
+                                            FontWeight="SemiBold"
+                                            TextWrapping="Wrap" />
+                                    </StackPanel>
+                                </Border>
+                            </UniformGrid>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2.1*" />
+                        <ColumnDefinition Width="18" />
+                        <ColumnDefinition Width="320" />
+                    </Grid.ColumnDefinitions>
+
+                    <ScrollViewer Grid.Column="0"
+                        VerticalScrollBarVisibility="Auto"
+                        HorizontalScrollBarVisibility="Disabled">
+                        <StackPanel>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="14" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Border Grid.Column="0" Style="{StaticResource DetailCardStyle}">
+                                    <StackPanel>
+                                        <TextBlock Style="{StaticResource DetailSectionHeaderStyle}" Text="{Binding [Section_Identity], Source={x:Static loc:TranslationSource.Instance}}" />
+
+                                        <TextBlock Style="{StaticResource DetailLabelStyle}" Text="{Binding [Label_FirstName], Source={x:Static loc:TranslationSource.Instance}}" />
+                                        <TextBlock x:Name="DetailFirstName" Style="{StaticResource DetailValueStyle}" />
+
+                                        <TextBlock Style="{StaticResource DetailLabelStyle}" Text="{Binding [Label_LastName], Source={x:Static loc:TranslationSource.Instance}}" />
+                                        <TextBlock x:Name="DetailLastName" Style="{StaticResource DetailValueStyle}" />
+
+                                        <TextBlock Style="{StaticResource DetailLabelStyle}" Text="{Binding [Label_Email], Source={x:Static loc:TranslationSource.Instance}}" />
+                                        <TextBlock x:Name="DetailEmail" Style="{StaticResource DetailValueStyle}" />
+
+                                        <TextBlock Style="{StaticResource DetailLabelStyle}" Text="{Binding [Label_Username], Source={x:Static loc:TranslationSource.Instance}}" />
+                                        <TextBlock x:Name="DetailUsername" Style="{StaticResource DetailValueStyle}" Margin="0,0,0,0" />
+                                    </StackPanel>
+                                </Border>
+
+                                <Border Grid.Column="2" Style="{StaticResource DetailCardStyle}">
+                                    <StackPanel>
+                                        <TextBlock Style="{StaticResource DetailSectionHeaderStyle}" Text="{Binding [Section_ProfilePlacement], Source={x:Static loc:TranslationSource.Instance}}" />
+
+                                        <TextBlock Style="{StaticResource DetailLabelStyle}" Text="{Binding [Label_Department], Source={x:Static loc:TranslationSource.Instance}}" />
+                                        <TextBlock x:Name="DetailDepartment" Style="{StaticResource DetailValueStyle}" />
+
+                                        <TextBlock Style="{StaticResource DetailLabelStyle}" Text="{Binding [Label_JobTitle], Source={x:Static loc:TranslationSource.Instance}}" />
+                                        <TextBlock x:Name="DetailTitle" Style="{StaticResource DetailValueStyle}" />
+
+                                        <TextBlock Style="{StaticResource DetailLabelStyle}" Text="{Binding [Label_OrganizationalUnit], Source={x:Static loc:TranslationSource.Instance}}" />
+                                        <TextBlock x:Name="DetailOU" Style="{StaticResource DetailValueStyle}" />
+
+                                        <TextBlock Style="{StaticResource DetailLabelStyle}" Text="{Binding [Label_DistinguishedName], Source={x:Static loc:TranslationSource.Instance}}" />
+                                        <TextBlock x:Name="DetailDN" Style="{StaticResource DetailValueStyle}" Margin="0,0,0,0" />
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+
+                            <Border Style="{StaticResource DetailCardStyle}">
+                                <StackPanel>
+                                    <TextBlock Style="{StaticResource DetailSectionHeaderStyle}" Text="{Binding [Section_Description], Source={x:Static loc:TranslationSource.Instance}}" />
+                                    <TextBlock x:Name="DetailDescription"
+                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                        TextWrapping="Wrap" />
+                                </StackPanel>
+                            </Border>
+
+                            <Border Style="{StaticResource DetailCardStyle}" Margin="0,0,0,0">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Grid.Row="0"
+                                        Style="{StaticResource DetailSectionHeaderStyle}"
+                                        Text="{Binding [Section_Groups], Source={x:Static loc:TranslationSource.Instance}}" />
+                                    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" MaxHeight="180">
+                                        <ItemsControl x:Name="DetailGroups">
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Border Margin="0,0,8,8"
+                                                        Padding="12,7"
+                                                        CornerRadius="4"
+                                                        Background="{StaticResource DetailAccentSoftBrush}"
+                                                        BorderBrush="{StaticResource DetailHeroBorderBrush}"
+                                                        BorderThickness="1">
+                                                        <TextBlock Text="{Binding}"
+                                                            Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                            TextTrimming="CharacterEllipsis" />
+                                                    </Border>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                            <ItemsControl.ItemsPanel>
+                                                <ItemsPanelTemplate>
+                                                    <WrapPanel />
+                                                </ItemsPanelTemplate>
+                                            </ItemsControl.ItemsPanel>
+                                        </ItemsControl>
+                                    </ScrollViewer>
+                                </Grid>
+                            </Border>
+                        </StackPanel>
+                    </ScrollViewer>
+
+                    <StackPanel Grid.Column="2">
+                        <Border Style="{StaticResource DetailCardStyle}">
+                            <StackPanel>
+                                <TextBlock Style="{StaticResource DetailSectionHeaderStyle}" Text="{Binding [Section_SecurityTimeline], Source={x:Static loc:TranslationSource.Instance}}" />
+
+                                <TextBlock Style="{StaticResource DetailLabelStyle}" Text="{Binding [Label_CurrentState], Source={x:Static loc:TranslationSource.Instance}}" />
+                                <TextBlock x:Name="DetailStatus"
+                                    Style="{StaticResource DetailValueStyle}" />
+
+                                <TextBlock Style="{StaticResource DetailLabelStyle}" Text="{Binding [Label_PasswordLastChanged], Source={x:Static loc:TranslationSource.Instance}}" />
+                                <TextBlock x:Name="DetailPasswordLastSet"
+                                    Style="{StaticResource DetailValueStyle}" />
+
+                                <TextBlock Style="{StaticResource DetailLabelStyle}" Text="{Binding [Label_LastSignIn], Source={x:Static loc:TranslationSource.Instance}}" />
+                                <TextBlock x:Name="DetailLastLogon"
+                                    Style="{StaticResource DetailValueStyle}"
+                                    Margin="0,0,0,0" />
+                            </StackPanel>
+                        </Border>
+
+                        <Border Style="{StaticResource DetailCardStyle}">
+                            <StackPanel>
+                                <TextBlock Style="{StaticResource DetailSectionHeaderStyle}" Text="{Binding [Section_Actions], Source={x:Static loc:TranslationSource.Instance}}" />
+                                <TextBlock Text="{Binding [Users_Actions_Hint], Source={x:Static loc:TranslationSource.Instance}}"
+                                    Margin="0,0,0,14"
+                                    Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                    TextWrapping="Wrap" />
+
+                                <ui:Button x:Name="EditUserButton"
+                                    Content="{Binding [Button_Edit], Source={x:Static loc:TranslationSource.Instance}}"
+                                    Style="{StaticResource ToolbarButtonStyle}"
+                                    HorizontalAlignment="Stretch"
+                                    Height="36"
+                                    Margin="0,0,0,8"
+                                    Click="OnEditUser" />
+
+                                <ui:Button x:Name="ResetPasswordButton"
+                                    Content="{Binding [Button_ResetPassword], Source={x:Static loc:TranslationSource.Instance}}"
+                                    Style="{StaticResource ToolbarButtonStyle}"
+                                    HorizontalAlignment="Stretch"
+                                    Height="36"
+                                    Margin="0,0,0,8"
+                                    Click="OnResetPassword" />
+
+                                <ui:Button x:Name="TerminateUserButton"
+                                    Content="{Binding [Button_Terminate], Source={x:Static loc:TranslationSource.Instance}}"
+                                    Style="{StaticResource GhostDangerButtonStyle}"
+                                    HorizontalAlignment="Stretch"
+                                    Height="36"
+                                    Margin="0,0,0,8"
+                                    Click="OnFireUser" />
+
+                                <ui:Button x:Name="DeleteUserButton"
+                                    Content="{Binding [Button_Delete], Source={x:Static loc:TranslationSource.Instance}}"
+                                    Style="{StaticResource GhostDangerButtonStyle}"
+                                    HorizontalAlignment="Stretch"
+                                    Height="36"
+                                    Click="OnDeleteUser" />
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </Border>
+
+        <Border Grid.Row="3"
+            x:Name="NoSelectionMessage"
+            Visibility="Visible"
+            Background="{DynamicResource ControlFillColorDefaultBrush}"
+            BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+            BorderThickness="1"
+            CornerRadius="14"
+            Padding="34,32"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Center">
+            <StackPanel VerticalAlignment="Center">
+                <TextBlock x:Name="NoSelectionTitleText"
+                    FontSize="24"
+                    FontWeight="SemiBold"
+                    Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                <TextBlock x:Name="NoSelectionBodyText"
+                    Margin="0,10,0,0"
+                    FontSize="14"
+                    Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                    TextWrapping="Wrap" />
+            </StackPanel>
+        </Border>
+    </Grid>
+</Page>

@@ -1,0 +1,133 @@
+<Page x:Class="ActiveManager.Views.Pages.DashboardPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:loc="clr-namespace:ActiveManager.Localization">
+
+    <Grid Margin="24,16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Margin="0,0,0,12">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0">
+                <TextBlock Text="{Binding [Page_Dashboard_Title], Source={x:Static loc:TranslationSource.Instance}}"
+                    FontSize="22"
+                    FontWeight="SemiBold"
+                    Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                <TextBlock x:Name="LastUpdatedText"
+                    Margin="0,4,0,0"
+                    Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+            </StackPanel>
+
+            <ui:Button Grid.Column="1"
+                Content="{Binding [Button_Refresh], Source={x:Static loc:TranslationSource.Instance}}"
+                Style="{StaticResource ToolbarButtonStyle}"
+                Icon="{ui:SymbolIcon ArrowSync24}"
+                Click="OnRefresh" />
+        </Grid>
+
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+                <UniformGrid Columns="4" Margin="0,0,0,12">
+                    <Border Margin="0,0,12,0" Padding="16" CornerRadius="8" Background="{DynamicResource ControlFillColorDefaultBrush}" BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}" BorderThickness="1">
+                        <StackPanel>
+                            <TextBlock Text="{Binding [Dashboard_AdStatus], Source={x:Static loc:TranslationSource.Instance}}" Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+                            <TextBlock x:Name="AdStatusText" Margin="0,6,0,4" FontSize="18" FontWeight="SemiBold" />
+                            <TextBlock x:Name="DomainText" TextWrapping="Wrap" Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+                        </StackPanel>
+                    </Border>
+                    <Border Margin="0,0,12,0" Padding="16" CornerRadius="8" Background="{DynamicResource ControlFillColorDefaultBrush}" BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}" BorderThickness="1">
+                        <StackPanel>
+                            <TextBlock Text="{Binding [Dashboard_Database], Source={x:Static loc:TranslationSource.Instance}}" Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+                            <TextBlock x:Name="DbStatusText" Margin="0,6,0,4" FontSize="18" FontWeight="SemiBold" />
+                            <TextBlock x:Name="CompanyText" TextWrapping="Wrap" Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+                        </StackPanel>
+                    </Border>
+                    <Border Margin="0,0,12,0" Padding="16" CornerRadius="8" Background="{DynamicResource ControlFillColorDefaultBrush}" BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}" BorderThickness="1">
+                        <StackPanel>
+                            <TextBlock Text="{Binding [Dashboard_RecentBackups], Source={x:Static loc:TranslationSource.Instance}}" Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+                            <TextBlock x:Name="RecentBackupsText" Margin="0,6,0,4" FontSize="22" FontWeight="SemiBold" />
+                            <TextBlock Text="{Binding [Dashboard_Last7Days], Source={x:Static loc:TranslationSource.Instance}}" Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+                        </StackPanel>
+                    </Border>
+                    <Border Padding="16" CornerRadius="8" Background="{DynamicResource ControlFillColorDefaultBrush}" BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}" BorderThickness="1">
+                        <StackPanel>
+                            <TextBlock Text="{Binding [Dashboard_RestoreCoverage], Source={x:Static loc:TranslationSource.Instance}}" Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+                            <TextBlock x:Name="RestoreCoverageText" Margin="0,6,0,4" FontSize="22" FontWeight="SemiBold" />
+                            <TextBlock x:Name="ErrorCountText" Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+                        </StackPanel>
+                    </Border>
+                </UniformGrid>
+
+                <UniformGrid Columns="4" Margin="0,0,0,12">
+                    <Border Margin="0,0,12,0" Padding="16" CornerRadius="8" Background="{DynamicResource ControlFillColorDefaultBrush}" BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}" BorderThickness="1">
+                        <StackPanel>
+                            <TextBlock Text="{Binding [Dashboard_TotalUsers], Source={x:Static loc:TranslationSource.Instance}}" Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+                            <TextBlock x:Name="TotalUsersText" Margin="0,6,0,0" FontSize="22" FontWeight="SemiBold" />
+                        </StackPanel>
+                    </Border>
+                    <Border Margin="0,0,12,0" Padding="16" CornerRadius="8" Background="{DynamicResource ControlFillColorDefaultBrush}" BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}" BorderThickness="1">
+                        <StackPanel>
+                            <TextBlock Text="{Binding [Dashboard_Active], Source={x:Static loc:TranslationSource.Instance}}" Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+                            <TextBlock x:Name="ActiveUsersText" Margin="0,6,0,0" FontSize="22" FontWeight="SemiBold" />
+                        </StackPanel>
+                    </Border>
+                    <Border Margin="0,0,12,0" Padding="16" CornerRadius="8" Background="{DynamicResource ControlFillColorDefaultBrush}" BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}" BorderThickness="1">
+                        <StackPanel>
+                            <TextBlock Text="{Binding [Dashboard_DisabledLocked], Source={x:Static loc:TranslationSource.Instance}}" Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+                            <TextBlock x:Name="RiskUsersText" Margin="0,6,0,0" FontSize="22" FontWeight="SemiBold" />
+                        </StackPanel>
+                    </Border>
+                    <Border Padding="16" CornerRadius="8" Background="{DynamicResource ControlFillColorDefaultBrush}" BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}" BorderThickness="1">
+                        <StackPanel>
+                            <TextBlock x:Name="InactiveUsersLabel" Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+                            <TextBlock x:Name="InactiveUsersText" Margin="0,6,0,0" FontSize="22" FontWeight="SemiBold" />
+                        </StackPanel>
+                    </Border>
+                </UniformGrid>
+
+                <Border Margin="0,0,0,12" Padding="16" CornerRadius="8" Background="{DynamicResource ControlFillColorDefaultBrush}" BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}" BorderThickness="1">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="16" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Text="{Binding [Dashboard_AttentionRequired], Source={x:Static loc:TranslationSource.Instance}}" FontSize="16" FontWeight="SemiBold" Margin="0,0,0,12" />
+                            <ItemsControl x:Name="AlertsList">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border Margin="0,0,0,8" Padding="10" CornerRadius="6" BorderThickness="1" BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}">
+                                            <StackPanel>
+                                                <TextBlock Text="{Binding Severity}" FontWeight="SemiBold" />
+                                                <TextBlock Text="{Binding Message}" TextWrapping="Wrap" Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+                                            </StackPanel>
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="2">
+                            <TextBlock Text="{Binding [Dashboard_QuickActions], Source={x:Static loc:TranslationSource.Instance}}" FontSize="16" FontWeight="SemiBold" Margin="0,0,0,12" />
+                            <ui:Button Content="{Binding [Dashboard_OpenUsers], Source={x:Static loc:TranslationSource.Instance}}" Style="{StaticResource ToolbarButtonStyle}" Click="OnOpenUsers" Margin="0,0,0,8" />
+                            <ui:Button Content="{Binding [Dashboard_CreateUser], Source={x:Static loc:TranslationSource.Instance}}" Style="{StaticResource ToolbarButtonStyle}" Click="OnOpenAddUser" Margin="0,0,0,8" />
+                            <ui:Button Content="{Binding [Dashboard_OpenRestore], Source={x:Static loc:TranslationSource.Instance}}" Style="{StaticResource ToolbarButtonStyle}" Click="OnOpenRestore" Margin="0,0,0,8" />
+                            <ui:Button Content="{Binding [Dashboard_OpenHistory], Source={x:Static loc:TranslationSource.Instance}}" Style="{StaticResource ToolbarButtonStyle}" Click="OnOpenHistory" Margin="0,0,0,8" />
+                            <ui:Button Content="{Binding [Dashboard_ErrorLog], Source={x:Static loc:TranslationSource.Instance}}" Style="{StaticResource ToolbarButtonStyle}" Click="OnOpenErrors" />
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

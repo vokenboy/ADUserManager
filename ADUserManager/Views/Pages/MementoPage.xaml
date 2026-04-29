@@ -1,0 +1,735 @@
+<Page x:Class="ActiveManager.Views.Pages.MementoPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:loc="clr-namespace:ActiveManager.Localization"
+    Loaded="OnLoaded"
+    Unloaded="OnUnloaded">
+
+    <Page.Resources>
+        <LinearGradientBrush x:Key="RestoreHeroBackgroundBrush" StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#F8FBFF" Offset="0" />
+            <GradientStop Color="#EEF6FB" Offset="0.55" />
+            <GradientStop Color="#F7F8FA" Offset="1" />
+        </LinearGradientBrush>
+
+        <SolidColorBrush x:Key="RestoreHeroBorderBrush" Color="#D7E7F1" />
+        <SolidColorBrush x:Key="RestoreAccentSoftBrush" Color="#E6F3F8" />
+        <SolidColorBrush x:Key="RestoreMutedBrush" Color="#5F6B76" />
+
+        <Style x:Key="RestoreDetailCardStyle" TargetType="Border">
+            <Setter Property="Padding" Value="18" />
+            <Setter Property="CornerRadius" Value="12" />
+            <Setter Property="Background" Value="{DynamicResource ControlFillColorSecondaryBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Margin" Value="0,0,0,14" />
+        </Style>
+
+        <Style x:Key="RestoreSectionHeaderStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
+            <Setter Property="Margin" Value="0,0,0,14" />
+        </Style>
+
+        <Style x:Key="RestoreLabelStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="11" />
+            <Setter Property="Foreground" Value="{StaticResource RestoreMutedBrush}" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="Margin" Value="0,0,0,4" />
+        </Style>
+
+        <Style x:Key="RestoreValueStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="Margin" Value="0,0,0,14" />
+        </Style>
+
+        <Style x:Key="RestoreSummaryCardStyle" TargetType="Border" BasedOn="{StaticResource RestoreDetailCardStyle}">
+            <Setter Property="Padding" Value="12" />
+            <Setter Property="Margin" Value="0,0,12,0" />
+            <Setter Property="MinHeight" Value="76" />
+        </Style>
+    </Page.Resources>
+
+    <Grid Margin="24,16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0"
+            Text="{Binding [Page_Restore_Title], Source={x:Static loc:TranslationSource.Instance}}"
+            FontSize="18"
+            FontWeight="SemiBold"
+            Margin="0,0,0,12"
+            Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+
+        <TabControl Grid.Row="1">
+            <TabItem Header="{Binding [Restore_Tab_Local], Source={x:Static loc:TranslationSource.Instance}}">
+                <Grid Margin="0,12,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0" Margin="0,0,0,12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="200" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                            <TextBlock Text="{Binding [Restore_Tab_Local], Source={x:Static loc:TranslationSource.Instance}}"
+                                FontSize="14"
+                                FontWeight="SemiBold"
+                                VerticalAlignment="Center"
+                                Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                            <TextBlock x:Name="MementoCountText"
+                                Text="  (0)"
+                                FontSize="13"
+                                VerticalAlignment="Center"
+                                Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+                        </StackPanel>
+
+                        <ui:TextBox Grid.Column="1"
+                            x:Name="SearchBox"
+                            PlaceholderText="{Binding [Search_Placeholder], Source={x:Static loc:TranslationSource.Instance}}"
+                            TextChanged="OnSearch"
+                            Margin="0,0,4,0"
+                            VerticalAlignment="Center" />
+
+                        <ui:Button Grid.Column="2" Content="{Binding [Button_Refresh], Source={x:Static loc:TranslationSource.Instance}}"
+                            Style="{StaticResource ToolbarButtonStyle}"
+                            Icon="{ui:SymbolIcon ArrowSync24}"
+                            Click="OnRefresh" />
+                    </Grid>
+
+                    <DataGrid Grid.Row="1"
+                        x:Name="MementoGrid"
+                        AutoGenerateColumns="False"
+                        IsReadOnly="True"
+                        SelectionMode="Single"
+                        CanUserAddRows="False"
+                        CanUserDeleteRows="False"
+                        HeadersVisibility="Column"
+                        GridLinesVisibility="Horizontal"
+                        BorderThickness="1"
+                        BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                        SelectionChanged="OnMementoSelected"
+                        Margin="0,0,0,12"
+                        MaxHeight="380"
+                        VerticalScrollBarVisibility="Auto"
+                        HorizontalScrollBarVisibility="Disabled">
+
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding DisplayName}" Width="2*">
+                                <DataGridTextColumn.Header>
+                                    <TextBlock Text="{Binding [Column_Name], Source={x:Static loc:TranslationSource.Instance}}" />
+                                </DataGridTextColumn.Header>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding SamAccountName}" Width="1.5*">
+                                <DataGridTextColumn.Header>
+                                    <TextBlock Text="{Binding [Column_Username], Source={x:Static loc:TranslationSource.Instance}}" />
+                                </DataGridTextColumn.Header>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding OrganizationalUnit}" Width="2*">
+                                <DataGridTextColumn.Header>
+                                    <TextBlock Text="{Binding [Column_Location], Source={x:Static loc:TranslationSource.Instance}}" />
+                                </DataGridTextColumn.Header>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding GroupCount}" Width="Auto" MinWidth="80">
+                                <DataGridTextColumn.Header>
+                                    <TextBlock Text="{Binding [Column_GroupCount], Source={x:Static loc:TranslationSource.Instance}}" />
+                                </DataGridTextColumn.Header>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding StatusText}" Width="Auto" MinWidth="80">
+                                <DataGridTextColumn.Header>
+                                    <TextBlock Text="{Binding [Column_Status], Source={x:Static loc:TranslationSource.Instance}}" />
+                                </DataGridTextColumn.Header>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding CapturedAtText}" Width="1.3*">
+                                <DataGridTextColumn.Header>
+                                    <TextBlock Text="{Binding [Column_Captured], Source={x:Static loc:TranslationSource.Instance}}" />
+                                </DataGridTextColumn.Header>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding CapturedBy}" Width="1.3*">
+                                <DataGridTextColumn.Header>
+                                    <TextBlock Text="{Binding [Column_CapturedBy], Source={x:Static loc:TranslationSource.Instance}}" />
+                                </DataGridTextColumn.Header>
+                            </DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <Border Grid.Row="2"
+                        x:Name="NoMementosMessage"
+                        Visibility="Visible"
+                        Background="{DynamicResource ControlFillColorDefaultBrush}"
+                        BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                        BorderThickness="1"
+                        CornerRadius="14"
+                        Padding="34,32"
+                        HorizontalAlignment="Stretch">
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock x:Name="NoMementosTitle"
+                                Text="Select a restore record"
+                                FontSize="24"
+                                FontWeight="SemiBold"
+                                Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                            <TextBlock x:Name="NoMementosText"
+                                Text="No saved changes yet. User states are captured automatically during termination."
+                                Margin="0,10,0,0"
+                                Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                FontSize="14"
+                                TextWrapping="Wrap" />
+                        </StackPanel>
+                    </Border>
+
+                    <Border Grid.Row="2"
+                        x:Name="MementoDetailsPanel"
+                        Visibility="Collapsed"
+                        Background="{DynamicResource ControlFillColorDefaultBrush}"
+                        BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                        BorderThickness="1"
+                        CornerRadius="14"
+                        Padding="22">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+
+                            <Border Grid.Row="0"
+                                Background="{StaticResource RestoreHeroBackgroundBrush}"
+                                BorderBrush="{StaticResource RestoreHeroBorderBrush}"
+                                BorderThickness="1"
+                                CornerRadius="16"
+                                Padding="18"
+                                Margin="0,0,0,14">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="520" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <StackPanel Grid.Column="0" Margin="0,0,22,0" VerticalAlignment="Center">
+                                        <TextBlock x:Name="DetailsHeader"
+                                            FontSize="18"
+                                            FontWeight="SemiBold"
+                                            Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                                        <TextBlock x:Name="DetailIdentitySubheader"
+                                            Margin="0,4,0,0"
+                                            FontSize="12"
+                                            Foreground="{StaticResource RestoreMutedBrush}"
+                                            TextWrapping="Wrap" />
+                                        <TextBlock x:Name="DetailIdentityNote"
+                                            Margin="0,8,0,0"
+                                            FontSize="12"
+                                            Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                            TextWrapping="Wrap" />
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                        <Border x:Name="DetailStatusBadgeBorder"
+                                            HorizontalAlignment="Left"
+                                            Padding="10,5"
+                                            CornerRadius="4"
+                                            BorderThickness="1">
+                                            <TextBlock x:Name="DetailStatusBadgeText"
+                                                FontSize="11"
+                                                FontWeight="SemiBold" />
+                                        </Border>
+
+                                        <UniformGrid Margin="0,12,0,0" Columns="3">
+                                            <Border Style="{StaticResource RestoreSummaryCardStyle}">
+                                                <StackPanel>
+                                                    <TextBlock Style="{StaticResource RestoreLabelStyle}" Text="{Binding [Label_GroupMemberships], Source={x:Static loc:TranslationSource.Instance}}" />
+                                                    <TextBlock x:Name="DetailGroupCountSummary" FontSize="14" FontWeight="SemiBold" />
+                                                </StackPanel>
+                                            </Border>
+                                            <Border Style="{StaticResource RestoreSummaryCardStyle}">
+                                                <StackPanel>
+                                                    <TextBlock Style="{StaticResource RestoreLabelStyle}" Text="{Binding [Label_Captured], Source={x:Static loc:TranslationSource.Instance}}" />
+                                                    <TextBlock x:Name="DetailCapturedSummary" FontSize="12" FontWeight="SemiBold" TextWrapping="Wrap" />
+                                                </StackPanel>
+                                            </Border>
+                                            <Border Style="{StaticResource RestoreSummaryCardStyle}" Margin="0,0,0,0">
+                                                <StackPanel>
+                                                    <TextBlock Style="{StaticResource RestoreLabelStyle}" Text="{Binding [Label_CapturedBy], Source={x:Static loc:TranslationSource.Instance}}" />
+                                                    <TextBlock x:Name="DetailCreatedBySummary" FontSize="12" FontWeight="SemiBold" TextWrapping="Wrap" />
+                                                </StackPanel>
+                                            </Border>
+                                        </UniformGrid>
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+
+                            <Grid Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2.1*" />
+                                    <ColumnDefinition Width="18" />
+                                    <ColumnDefinition Width="320" />
+                                </Grid.ColumnDefinitions>
+
+                                <ScrollViewer Grid.Column="0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                                    <StackPanel>
+                                        <WrapPanel Margin="0,0,0,2">
+                                            <Border Style="{StaticResource RestoreSummaryCardStyle}" Width="220">
+                                                <StackPanel>
+                                                    <TextBlock Style="{StaticResource RestoreLabelStyle}" Text="{Binding [Label_DirectoryPlacement], Source={x:Static loc:TranslationSource.Instance}}" />
+                                                    <TextBlock x:Name="DetailLocationSummary" FontSize="13" FontWeight="SemiBold" TextWrapping="Wrap" />
+                                                </StackPanel>
+                                            </Border>
+                                            <Border Style="{StaticResource RestoreSummaryCardStyle}" Width="176">
+                                                <StackPanel>
+                                                    <TextBlock Style="{StaticResource RestoreLabelStyle}" Text="{Binding [Label_AccountEnabled], Source={x:Static loc:TranslationSource.Instance}}" />
+                                                    <TextBlock x:Name="DetailEnabledSummary" FontSize="16" FontWeight="SemiBold" TextWrapping="Wrap" />
+                                                </StackPanel>
+                                            </Border>
+                                            <Border Style="{StaticResource RestoreSummaryCardStyle}" Width="176" Margin="0,0,0,12">
+                                                <StackPanel>
+                                                    <TextBlock Style="{StaticResource RestoreLabelStyle}" Text="{Binding [Label_Locked], Source={x:Static loc:TranslationSource.Instance}}" />
+                                                    <TextBlock x:Name="DetailLockedSummary" FontSize="16" FontWeight="SemiBold" TextWrapping="Wrap" />
+                                                </StackPanel>
+                                            </Border>
+                                        </WrapPanel>
+
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="14" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+
+                                            <Border Grid.Column="0" Style="{StaticResource RestoreDetailCardStyle}">
+                                                <StackPanel>
+                                                    <TextBlock Style="{StaticResource RestoreSectionHeaderStyle}" Text="{Binding [Section_Identity], Source={x:Static loc:TranslationSource.Instance}}" />
+                                                    <TextBlock Style="{StaticResource RestoreLabelStyle}" Text="{Binding [Label_Name], Source={x:Static loc:TranslationSource.Instance}}" />
+                                                    <TextBlock x:Name="DetailDisplayName" Style="{StaticResource RestoreValueStyle}" />
+                                                    <TextBlock Style="{StaticResource RestoreLabelStyle}" Text="{Binding [Label_Username], Source={x:Static loc:TranslationSource.Instance}}" />
+                                                    <TextBlock x:Name="DetailSamAccountName" Style="{StaticResource RestoreValueStyle}" />
+                                                    <TextBlock Style="{StaticResource RestoreLabelStyle}" Text="{Binding [Label_Location], Source={x:Static loc:TranslationSource.Instance}}" />
+                                                    <TextBlock x:Name="DetailOU" Style="{StaticResource RestoreValueStyle}" Margin="0,0,0,0" />
+                                                </StackPanel>
+                                            </Border>
+
+                                            <Border Grid.Column="2" Style="{StaticResource RestoreDetailCardStyle}">
+                                                <StackPanel>
+                                                    <TextBlock Style="{StaticResource RestoreSectionHeaderStyle}" Text="{Binding [Section_RestoreMetadata], Source={x:Static loc:TranslationSource.Instance}}" />
+                                                    <TextBlock Style="{StaticResource RestoreLabelStyle}" Text="{Binding [Label_Captured], Source={x:Static loc:TranslationSource.Instance}}" />
+                                                    <TextBlock x:Name="DetailCapturedAt" Style="{StaticResource RestoreValueStyle}" />
+                                                    <TextBlock Style="{StaticResource RestoreLabelStyle}" Text="{Binding [Label_CreatedBy], Source={x:Static loc:TranslationSource.Instance}}" />
+                                                    <TextBlock x:Name="DetailCreatedBy" Style="{StaticResource RestoreValueStyle}" />
+                                                    <TextBlock Style="{StaticResource RestoreLabelStyle}" Text="{Binding [Label_Expiration], Source={x:Static loc:TranslationSource.Instance}}" />
+                                                    <TextBlock x:Name="DetailExpiration" Style="{StaticResource RestoreValueStyle}" Margin="0,0,0,0" />
+                                                </StackPanel>
+                                            </Border>
+                                        </Grid>
+
+                                        <Border Style="{StaticResource RestoreDetailCardStyle}">
+                                            <StackPanel>
+                                                <TextBlock Style="{StaticResource RestoreSectionHeaderStyle}" Text="{Binding [Section_DistinguishedName], Source={x:Static loc:TranslationSource.Instance}}" />
+                                                <TextBlock x:Name="DetailDN" Foreground="{DynamicResource TextFillColorPrimaryBrush}" TextWrapping="Wrap" />
+                                            </StackPanel>
+                                        </Border>
+
+                                        <Border Style="{StaticResource RestoreDetailCardStyle}" Margin="0,0,0,0">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition Height="*" />
+                                                </Grid.RowDefinitions>
+                                                <TextBlock Grid.Row="0" Style="{StaticResource RestoreSectionHeaderStyle}" Text="{Binding [Section_Groups], Source={x:Static loc:TranslationSource.Instance}}" />
+                                                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" MaxHeight="180">
+                                                    <ItemsControl x:Name="DetailGroupsList">
+                                                        <ItemsControl.ItemTemplate>
+                                                            <DataTemplate>
+                                                                <Border Margin="0,0,8,8" Padding="12,7" CornerRadius="4" Background="{StaticResource RestoreAccentSoftBrush}" BorderBrush="{StaticResource RestoreHeroBorderBrush}" BorderThickness="1">
+                                                                    <TextBlock Text="{Binding}" Foreground="{DynamicResource TextFillColorPrimaryBrush}" TextTrimming="CharacterEllipsis" />
+                                                                </Border>
+                                                            </DataTemplate>
+                                                        </ItemsControl.ItemTemplate>
+                                                        <ItemsControl.ItemsPanel>
+                                                            <ItemsPanelTemplate>
+                                                                <WrapPanel />
+                                                            </ItemsPanelTemplate>
+                                                        </ItemsControl.ItemsPanel>
+                                                    </ItemsControl>
+                                                </ScrollViewer>
+                                            </Grid>
+                                        </Border>
+                                    </StackPanel>
+                                </ScrollViewer>
+
+                                <StackPanel Grid.Column="2">
+                                    <Border Style="{StaticResource RestoreDetailCardStyle}">
+                                        <StackPanel>
+                                            <TextBlock Style="{StaticResource RestoreSectionHeaderStyle}" Text="{Binding [Section_StateSnapshot], Source={x:Static loc:TranslationSource.Instance}}" />
+                                            <TextBlock Style="{StaticResource RestoreLabelStyle}" Text="{Binding [Label_CurrentState], Source={x:Static loc:TranslationSource.Instance}}" />
+                                            <TextBlock x:Name="DetailStateText" Style="{StaticResource RestoreValueStyle}" />
+                                            <TextBlock Style="{StaticResource RestoreLabelStyle}" Text="{Binding [Label_AccountEnabled], Source={x:Static loc:TranslationSource.Instance}}" />
+                                            <TextBlock x:Name="DetailIsEnabled" Style="{StaticResource RestoreValueStyle}" />
+                                            <TextBlock Style="{StaticResource RestoreLabelStyle}" Text="{Binding [Label_Locked], Source={x:Static loc:TranslationSource.Instance}}" />
+                                            <TextBlock x:Name="DetailIsLockedOut" Style="{StaticResource RestoreValueStyle}" Margin="0,0,0,0" />
+                                        </StackPanel>
+                                    </Border>
+
+                                    <Border Style="{StaticResource RestoreDetailCardStyle}">
+                                        <StackPanel>
+                                            <TextBlock Style="{StaticResource RestoreSectionHeaderStyle}" Text="{Binding [Section_Actions], Source={x:Static loc:TranslationSource.Instance}}" />
+                                            <TextBlock Text="{Binding [Restore_Actions_Hint_Local], Source={x:Static loc:TranslationSource.Instance}}"
+                                                Margin="0,0,0,14"
+                                                Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                                TextWrapping="Wrap" />
+                                            <ui:Button x:Name="RestoreSelectedButton"
+                                                Content="{Binding [Button_RestoreUser], Source={x:Static loc:TranslationSource.Instance}}"
+                                                Style="{StaticResource ToolbarButtonStyle}"
+                                                HorizontalAlignment="Stretch"
+                                                Height="36"
+                                                Click="OnRestore" />
+                                        </StackPanel>
+                                    </Border>
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="{Binding [Restore_Tab_Remote], Source={x:Static loc:TranslationSource.Instance}}">
+                <Grid Margin="0,12,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0" Margin="0,0,0,12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="200" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                            <TextBlock Text="{Binding [Restore_Tab_Remote], Source={x:Static loc:TranslationSource.Instance}}"
+                                FontSize="14"
+                                FontWeight="SemiBold"
+                                VerticalAlignment="Center"
+                                Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                            <TextBlock x:Name="DbCountText"
+                                Text="  (0)"
+                                FontSize="13"
+                                VerticalAlignment="Center"
+                                Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+                        </StackPanel>
+
+                        <ui:TextBox Grid.Column="1"
+                            x:Name="DbSearchBox"
+                            PlaceholderText="{Binding [Search_Placeholder], Source={x:Static loc:TranslationSource.Instance}}"
+                            TextChanged="OnDbSearch"
+                            Margin="0,0,4,0"
+                            VerticalAlignment="Center" />
+
+                        <ui:Button Grid.Column="2" Content="{Binding [Button_Refresh], Source={x:Static loc:TranslationSource.Instance}}"
+                            Style="{StaticResource ToolbarButtonStyle}"
+                            Icon="{ui:SymbolIcon ArrowSync24}"
+                            Click="OnDbRefresh" />
+                    </Grid>
+
+                    <DataGrid Grid.Row="1"
+                        x:Name="DbGrid"
+                        AutoGenerateColumns="False"
+                        IsReadOnly="True"
+                        SelectionMode="Single"
+                        CanUserAddRows="False"
+                        CanUserDeleteRows="False"
+                        HeadersVisibility="Column"
+                        GridLinesVisibility="Horizontal"
+                        BorderThickness="1"
+                        BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                        SelectionChanged="OnDbSelectionChanged"
+                        Margin="0,0,0,12"
+                        MaxHeight="380"
+                        VerticalScrollBarVisibility="Auto"
+                        HorizontalScrollBarVisibility="Disabled">
+
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding DisplayName}" Width="2*">
+                                <DataGridTextColumn.Header>
+                                    <TextBlock Text="{Binding [Column_Name], Source={x:Static loc:TranslationSource.Instance}}" />
+                                </DataGridTextColumn.Header>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding SamAccountName}" Width="1.5*">
+                                <DataGridTextColumn.Header>
+                                    <TextBlock Text="{Binding [Column_Username], Source={x:Static loc:TranslationSource.Instance}}" />
+                                </DataGridTextColumn.Header>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding OrganizationalUnit}" Width="2*">
+                                <DataGridTextColumn.Header>
+                                    <TextBlock Text="{Binding [Column_Location], Source={x:Static loc:TranslationSource.Instance}}" />
+                                </DataGridTextColumn.Header>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding GroupCount}" Width="Auto" MinWidth="80">
+                                <DataGridTextColumn.Header>
+                                    <TextBlock Text="{Binding [Column_GroupCount], Source={x:Static loc:TranslationSource.Instance}}" />
+                                </DataGridTextColumn.Header>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding StatusText}" Width="Auto" MinWidth="80">
+                                <DataGridTextColumn.Header>
+                                    <TextBlock Text="{Binding [Column_Status], Source={x:Static loc:TranslationSource.Instance}}" />
+                                </DataGridTextColumn.Header>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding CreatedAtText}" Width="1.3*">
+                                <DataGridTextColumn.Header>
+                                    <TextBlock Text="{Binding [Column_Captured], Source={x:Static loc:TranslationSource.Instance}}" />
+                                </DataGridTextColumn.Header>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding CreatedBy}" Width="1.3*">
+                                <DataGridTextColumn.Header>
+                                    <TextBlock Text="{Binding [Column_CapturedBy], Source={x:Static loc:TranslationSource.Instance}}" />
+                                </DataGridTextColumn.Header>
+                            </DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <Border Grid.Row="2"
+                        x:Name="DbNoRecordsMessage"
+                        Visibility="Visible"
+                        Background="{DynamicResource ControlFillColorDefaultBrush}"
+                        BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                        BorderThickness="1"
+                        CornerRadius="14"
+                        Padding="34,32"
+                        HorizontalAlignment="Stretch">
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock x:Name="DbNoRecordsTitle"
+                                FontSize="24"
+                                FontWeight="SemiBold"
+                                Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                            <TextBlock x:Name="DbNoRecordsText"
+                                Text="Connecting to database..."
+                                Margin="0,10,0,0"
+                                Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                FontSize="14"
+                                TextWrapping="Wrap" />
+                        </StackPanel>
+                    </Border>
+
+                    <Border Grid.Row="2"
+                        x:Name="DbDetailsPanel"
+                        Visibility="Collapsed"
+                        Background="{DynamicResource ControlFillColorDefaultBrush}"
+                        BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                        BorderThickness="1"
+                        CornerRadius="14"
+                        Padding="22">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+
+                            <Border Grid.Row="0"
+                                Background="{StaticResource RestoreHeroBackgroundBrush}"
+                                BorderBrush="{StaticResource RestoreHeroBorderBrush}"
+                                BorderThickness="1"
+                                CornerRadius="16"
+                                Padding="18"
+                                Margin="0,0,0,14">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="520" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <StackPanel Grid.Column="0" Margin="0,0,22,0" VerticalAlignment="Center">
+                                        <TextBlock x:Name="DbDetailsHeader"
+                                            FontSize="18"
+                                            FontWeight="SemiBold"
+                                            Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                                        <TextBlock x:Name="DbDetailIdentitySubheader"
+                                            Margin="0,4,0,0"
+                                            FontSize="12"
+                                            Foreground="{StaticResource RestoreMutedBrush}"
+                                            TextWrapping="Wrap" />
+                                        <TextBlock x:Name="DbDetailIdentityNote"
+                                            Margin="0,8,0,0"
+                                            FontSize="12"
+                                            Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                            TextWrapping="Wrap" />
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                        <Border x:Name="DbDetailStatusBadgeBorder"
+                                            HorizontalAlignment="Left"
+                                            Padding="10,5"
+                                            CornerRadius="4"
+                                            BorderThickness="1">
+                                            <TextBlock x:Name="DbDetailStatusBadgeText"
+                                                FontSize="11"
+                                                FontWeight="SemiBold" />
+                                        </Border>
+
+                                        <UniformGrid Margin="0,12,0,0" Columns="3">
+                                            <Border Style="{StaticResource RestoreSummaryCardStyle}">
+                                                <StackPanel>
+                                                    <TextBlock Style="{StaticResource RestoreLabelStyle}" Text="{Binding [Label_GroupMemberships], Source={x:Static loc:TranslationSource.Instance}}" />
+                                                    <TextBlock x:Name="DbDetailGroupCountSummary" FontSize="14" FontWeight="SemiBold" />
+                                                </StackPanel>
+                                            </Border>
+                                            <Border Style="{StaticResource RestoreSummaryCardStyle}">
+                                                <StackPanel>
+                                                    <TextBlock Style="{StaticResource RestoreLabelStyle}" Text="{Binding [Label_Captured], Source={x:Static loc:TranslationSource.Instance}}" />
+                                                    <TextBlock x:Name="DbDetailCapturedSummary" FontSize="12" FontWeight="SemiBold" TextWrapping="Wrap" />
+                                                </StackPanel>
+                                            </Border>
+                                            <Border Style="{StaticResource RestoreSummaryCardStyle}" Margin="0,0,0,0">
+                                                <StackPanel>
+                                                    <TextBlock Style="{StaticResource RestoreLabelStyle}" Text="{Binding [Label_CapturedBy], Source={x:Static loc:TranslationSource.Instance}}" />
+                                                    <TextBlock x:Name="DbDetailCreatedBySummary" FontSize="12" FontWeight="SemiBold" TextWrapping="Wrap" />
+                                                </StackPanel>
+                                            </Border>
+                                        </UniformGrid>
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+
+                            <Grid Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2.1*" />
+                                    <ColumnDefinition Width="18" />
+                                    <ColumnDefinition Width="320" />
+                                </Grid.ColumnDefinitions>
+
+                                <ScrollViewer Grid.Column="0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                                    <StackPanel>
+                                        <WrapPanel Margin="0,0,0,2">
+                                            <Border Style="{StaticResource RestoreSummaryCardStyle}" Width="220">
+                                                <StackPanel>
+                                                    <TextBlock Style="{StaticResource RestoreLabelStyle}" Text="{Binding [Label_DirectoryPlacement], Source={x:Static loc:TranslationSource.Instance}}" />
+                                                    <TextBlock x:Name="DbDetailLocationSummary" FontSize="13" FontWeight="SemiBold" TextWrapping="Wrap" />
+                                                </StackPanel>
+                                            </Border>
+                                            <Border Style="{StaticResource RestoreSummaryCardStyle}" Width="176">
+                                                <StackPanel>
+                                                    <TextBlock Style="{StaticResource RestoreLabelStyle}" Text="{Binding [Label_AccountEnabled], Source={x:Static loc:TranslationSource.Instance}}" />
+                                                    <TextBlock x:Name="DbDetailEnabledSummary" FontSize="16" FontWeight="SemiBold" TextWrapping="Wrap" />
+                                                </StackPanel>
+                                            </Border>
+                                            <Border Style="{StaticResource RestoreSummaryCardStyle}" Width="176" Margin="0,0,0,12">
+                                                <StackPanel>
+                                                    <TextBlock Style="{StaticResource RestoreLabelStyle}" Text="{Binding [Label_Locked], Source={x:Static loc:TranslationSource.Instance}}" />
+                                                    <TextBlock x:Name="DbDetailLockedSummary" FontSize="16" FontWeight="SemiBold" TextWrapping="Wrap" />
+                                                </StackPanel>
+                                            </Border>
+                                        </WrapPanel>
+
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="14" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+
+                                            <Border Grid.Column="0" Style="{StaticResource RestoreDetailCardStyle}">
+                                                <StackPanel>
+                                                    <TextBlock Style="{StaticResource RestoreSectionHeaderStyle}" Text="{Binding [Section_Identity], Source={x:Static loc:TranslationSource.Instance}}" />
+                                                    <TextBlock Style="{StaticResource RestoreLabelStyle}" Text="{Binding [Label_Name], Source={x:Static loc:TranslationSource.Instance}}" />
+                                                    <TextBlock x:Name="DbDetailDisplayName" Style="{StaticResource RestoreValueStyle}" />
+                                                    <TextBlock Style="{StaticResource RestoreLabelStyle}" Text="{Binding [Label_Username], Source={x:Static loc:TranslationSource.Instance}}" />
+                                                    <TextBlock x:Name="DbDetailSamAccountName" Style="{StaticResource RestoreValueStyle}" />
+                                                    <TextBlock Style="{StaticResource RestoreLabelStyle}" Text="{Binding [Label_Location], Source={x:Static loc:TranslationSource.Instance}}" />
+                                                    <TextBlock x:Name="DbDetailOU" Style="{StaticResource RestoreValueStyle}" Margin="0,0,0,0" />
+                                                </StackPanel>
+                                            </Border>
+
+                                            <Border Grid.Column="2" Style="{StaticResource RestoreDetailCardStyle}">
+                                                <StackPanel>
+                                                    <TextBlock Style="{StaticResource RestoreSectionHeaderStyle}" Text="{Binding [Section_RestoreMetadata], Source={x:Static loc:TranslationSource.Instance}}" />
+                                                    <TextBlock Style="{StaticResource RestoreLabelStyle}" Text="{Binding [Label_Captured], Source={x:Static loc:TranslationSource.Instance}}" />
+                                                    <TextBlock x:Name="DbDetailCreatedAt" Style="{StaticResource RestoreValueStyle}" />
+                                                    <TextBlock Style="{StaticResource RestoreLabelStyle}" Text="{Binding [Label_CreatedBy], Source={x:Static loc:TranslationSource.Instance}}" />
+                                                    <TextBlock x:Name="DbDetailCreatedBy" Style="{StaticResource RestoreValueStyle}" />
+                                                    <TextBlock Style="{StaticResource RestoreLabelStyle}" Text="{Binding [Label_Expiration], Source={x:Static loc:TranslationSource.Instance}}" />
+                                                    <TextBlock x:Name="DbDetailExpiration" Style="{StaticResource RestoreValueStyle}" Margin="0,0,0,0" />
+                                                </StackPanel>
+                                            </Border>
+                                        </Grid>
+
+                                        <Border Style="{StaticResource RestoreDetailCardStyle}">
+                                            <StackPanel>
+                                                <TextBlock Style="{StaticResource RestoreSectionHeaderStyle}" Text="{Binding [Section_DistinguishedName], Source={x:Static loc:TranslationSource.Instance}}" />
+                                                <TextBlock x:Name="DbDetailDN" Foreground="{DynamicResource TextFillColorPrimaryBrush}" TextWrapping="Wrap" />
+                                            </StackPanel>
+                                        </Border>
+
+                                        <Border Style="{StaticResource RestoreDetailCardStyle}" Margin="0,0,0,0">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition Height="*" />
+                                                </Grid.RowDefinitions>
+                                                <TextBlock Grid.Row="0" Style="{StaticResource RestoreSectionHeaderStyle}" Text="{Binding [Section_Groups], Source={x:Static loc:TranslationSource.Instance}}" />
+                                                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" MaxHeight="180">
+                                                    <ItemsControl x:Name="DbDetailGroupsList">
+                                                        <ItemsControl.ItemTemplate>
+                                                            <DataTemplate>
+                                                                <Border Margin="0,0,8,8" Padding="12,7" CornerRadius="4" Background="{StaticResource RestoreAccentSoftBrush}" BorderBrush="{StaticResource RestoreHeroBorderBrush}" BorderThickness="1">
+                                                                    <TextBlock Text="{Binding}" Foreground="{DynamicResource TextFillColorPrimaryBrush}" TextTrimming="CharacterEllipsis" />
+                                                                </Border>
+                                                            </DataTemplate>
+                                                        </ItemsControl.ItemTemplate>
+                                                        <ItemsControl.ItemsPanel>
+                                                            <ItemsPanelTemplate>
+                                                                <WrapPanel />
+                                                            </ItemsPanelTemplate>
+                                                        </ItemsControl.ItemsPanel>
+                                                    </ItemsControl>
+                                                </ScrollViewer>
+                                            </Grid>
+                                        </Border>
+                                    </StackPanel>
+                                </ScrollViewer>
+
+                                <StackPanel Grid.Column="2">
+                                    <Border Style="{StaticResource RestoreDetailCardStyle}">
+                                        <StackPanel>
+                                            <TextBlock Style="{StaticResource RestoreSectionHeaderStyle}" Text="{Binding [Section_StateSnapshot], Source={x:Static loc:TranslationSource.Instance}}" />
+                                            <TextBlock Style="{StaticResource RestoreLabelStyle}" Text="{Binding [Label_CurrentState], Source={x:Static loc:TranslationSource.Instance}}" />
+                                            <TextBlock x:Name="DbDetailStateText" Style="{StaticResource RestoreValueStyle}" />
+                                            <TextBlock Style="{StaticResource RestoreLabelStyle}" Text="{Binding [Label_AccountEnabled], Source={x:Static loc:TranslationSource.Instance}}" />
+                                            <TextBlock x:Name="DbDetailIsEnabled" Style="{StaticResource RestoreValueStyle}" />
+                                            <TextBlock Style="{StaticResource RestoreLabelStyle}" Text="{Binding [Label_Locked], Source={x:Static loc:TranslationSource.Instance}}" />
+                                            <TextBlock x:Name="DbDetailIsLockedOut" Style="{StaticResource RestoreValueStyle}" Margin="0,0,0,0" />
+                                        </StackPanel>
+                                    </Border>
+
+                                    <Border Style="{StaticResource RestoreDetailCardStyle}">
+                                        <StackPanel>
+                                            <TextBlock Style="{StaticResource RestoreSectionHeaderStyle}" Text="{Binding [Section_Actions], Source={x:Static loc:TranslationSource.Instance}}" />
+                                            <TextBlock Text="{Binding [Restore_Actions_Hint_Remote], Source={x:Static loc:TranslationSource.Instance}}"
+                                                Margin="0,0,0,14"
+                                                Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                                TextWrapping="Wrap" />
+                                            <ui:Button x:Name="DbRestoreSelectedButton"
+                                                Content="{Binding [Button_RestoreUser], Source={x:Static loc:TranslationSource.Instance}}"
+                                                Style="{StaticResource ToolbarButtonStyle}"
+                                                HorizontalAlignment="Stretch"
+                                                Height="36"
+                                                Click="OnDbRestore" />
+                                        </StackPanel>
+                                    </Border>
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Page>

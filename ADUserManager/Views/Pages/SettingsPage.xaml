@@ -1,0 +1,612 @@
+<Page x:Class="ActiveManager.Views.Pages.SettingsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:loc="clr-namespace:ActiveManager.Localization">
+
+    <Page.Resources>
+        <LinearGradientBrush x:Key="SettingsHeroBackgroundBrush" StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#F7FBFF" Offset="0" />
+            <GradientStop Color="#EDF5FB" Offset="0.58" />
+            <GradientStop Color="#FAF8F4" Offset="1" />
+        </LinearGradientBrush>
+
+        <SolidColorBrush x:Key="SettingsHeroBorderBrush" Color="#D7E4EF" />
+        <SolidColorBrush x:Key="SettingsMutedBrush" Color="#5F6B76" />
+        <SolidColorBrush x:Key="SettingsAccentSoftBrush" Color="#E9F1F8" />
+
+        <Style x:Key="SettingsCardStyle" TargetType="Border">
+            <Setter Property="Padding" Value="18" />
+            <Setter Property="CornerRadius" Value="12" />
+            <Setter Property="Background" Value="{DynamicResource ControlFillColorSecondaryBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Margin" Value="0,0,0,14" />
+        </Style>
+
+        <Style x:Key="SettingsSectionHeaderStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
+            <Setter Property="Margin" Value="0,0,0,14" />
+        </Style>
+
+        <Style x:Key="SettingsLabelStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="11" />
+            <Setter Property="Foreground" Value="{StaticResource SettingsMutedBrush}" />
+            <Setter Property="Margin" Value="0,0,0,4" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+        </Style>
+
+        <Style x:Key="SettingsValueStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
+            <Setter Property="Margin" Value="0,0,0,14" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+        </Style>
+    </Page.Resources>
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="24,16" HorizontalAlignment="Stretch">
+            <TextBlock Text="{Binding [Page_Settings_Title], Source={x:Static loc:TranslationSource.Instance}}"
+                FontSize="24"
+                FontWeight="SemiBold"
+                Margin="0,0,0,16" />
+
+            <TabControl>
+                <!-- General tab -->
+                <TabItem Header="{Binding [Settings_Tab_General], Source={x:Static loc:TranslationSource.Instance}}">
+                    <StackPanel Margin="0,16,0,0" MaxWidth="760" HorizontalAlignment="Left">
+                        <Border Style="{StaticResource SettingsCardStyle}">
+                            <StackPanel>
+                                <TextBlock Text="{Binding [Settings_Language_Title], Source={x:Static loc:TranslationSource.Instance}}"
+                                    FontSize="16"
+                                    FontWeight="SemiBold"
+                                    Margin="0,0,0,8"/>
+
+                                <TextBlock Text="{Binding [Settings_Language_Hint], Source={x:Static loc:TranslationSource.Instance}}"
+                                    TextWrapping="Wrap"
+                                    Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                    FontSize="13"
+                                    Margin="0,0,0,16"/>
+
+                                <Grid Margin="0,0,0,8">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="170"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0"
+                                        Text="{Binding [Settings_Language_Label], Source={x:Static loc:TranslationSource.Instance}}"
+                                        VerticalAlignment="Center" FontSize="13"/>
+                                    <ComboBox Grid.Column="1" x:Name="LanguageCombo"
+                                        SelectionChanged="OnLanguageChanged"/>
+                                </Grid>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </TabItem>
+
+                <!-- My Profile tab -->
+                <TabItem Header="{Binding [Settings_Tab_Profile], Source={x:Static loc:TranslationSource.Instance}}">
+                    <Grid Margin="0,16,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Grid.Row="0" x:Name="ProfileContentPanel" Visibility="Collapsed">
+                            <Border Background="{StaticResource SettingsHeroBackgroundBrush}"
+                                BorderBrush="{StaticResource SettingsHeroBorderBrush}"
+                                BorderThickness="1"
+                                CornerRadius="16"
+                                Padding="20"
+                                Margin="0,0,0,14">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="430" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <StackPanel Grid.Column="0" Margin="0,0,20,0">
+                                        <TextBlock x:Name="ProfileHeroNameText"
+                                            FontSize="24"
+                                            FontWeight="SemiBold" />
+                                        <TextBlock x:Name="ProfileHeroIdentityText"
+                                            Margin="0,5,0,0"
+                                            Foreground="{StaticResource SettingsMutedBrush}"
+                                            TextWrapping="Wrap" />
+                                        <TextBlock x:Name="ProfileHeroNoteText"
+                                            Margin="0,10,0,0"
+                                            Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                            TextWrapping="Wrap" />
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                        <Border x:Name="ProfileStatusBadgeBorder"
+                                            HorizontalAlignment="Left"
+                                            Padding="10,5"
+                                            CornerRadius="4"
+                                            BorderThickness="1">
+                                            <TextBlock x:Name="ProfileStatusBadgeText"
+                                                FontWeight="SemiBold"
+                                                FontSize="11" />
+                                        </Border>
+
+                                        <UniformGrid Columns="3" Margin="0,12,0,0">
+                                            <Border Style="{StaticResource SettingsCardStyle}" Margin="0,0,12,0" MinHeight="78">
+                                                <StackPanel>
+                                                    <TextBlock x:Name="LabelLastSignIn1" Style="{StaticResource SettingsLabelStyle}" />
+                                                    <TextBlock x:Name="ProfileSummaryLastLogonText" FontWeight="SemiBold" TextWrapping="Wrap" />
+                                                </StackPanel>
+                                            </Border>
+                                            <Border Style="{StaticResource SettingsCardStyle}" Margin="0,0,12,0" MinHeight="78">
+                                                <StackPanel>
+                                                    <TextBlock x:Name="LabelPasswordUpdated1" Style="{StaticResource SettingsLabelStyle}" />
+                                                    <TextBlock x:Name="ProfileSummaryPasswordText" FontWeight="SemiBold" TextWrapping="Wrap" />
+                                                </StackPanel>
+                                            </Border>
+                                            <Border Style="{StaticResource SettingsCardStyle}" Margin="0" MinHeight="78">
+                                                <StackPanel>
+                                                    <TextBlock x:Name="LabelGroupMemberships1" Style="{StaticResource SettingsLabelStyle}" />
+                                                    <TextBlock x:Name="ProfileSummaryGroupsText" FontWeight="SemiBold" TextWrapping="Wrap" />
+                                                </StackPanel>
+                                            </Border>
+                                        </UniformGrid>
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1.1*" />
+                                    <ColumnDefinition Width="16" />
+                                    <ColumnDefinition Width="1.5*" />
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel Grid.Column="0">
+                                    <Border Style="{StaticResource SettingsCardStyle}">
+                                        <StackPanel>
+                                            <TextBlock x:Name="LabelProtectedDetails" Style="{StaticResource SettingsSectionHeaderStyle}" />
+
+                                            <TextBlock x:Name="LabelUsername1" Style="{StaticResource SettingsLabelStyle}" />
+                                            <TextBlock x:Name="ProfileUsernameText" Style="{StaticResource SettingsValueStyle}" />
+
+                                            <TextBlock x:Name="LabelPrimaryEmail1" Style="{StaticResource SettingsLabelStyle}" />
+                                            <TextBlock x:Name="ProfileEmailText" Style="{StaticResource SettingsValueStyle}" />
+
+                                            <TextBlock x:Name="LabelAccountStatus1" Style="{StaticResource SettingsLabelStyle}" />
+                                            <TextBlock x:Name="ProfileStatusText" Style="{StaticResource SettingsValueStyle}" />
+
+                                            <TextBlock x:Name="LabelOrgUnit1" Style="{StaticResource SettingsLabelStyle}" />
+                                            <TextBlock x:Name="ProfileOuText" Style="{StaticResource SettingsValueStyle}" />
+
+                                            <TextBlock x:Name="LabelDistName1" Style="{StaticResource SettingsLabelStyle}" />
+                                            <TextBlock x:Name="ProfileDnText" Style="{StaticResource SettingsValueStyle}" Margin="0,0,0,0" />
+                                        </StackPanel>
+                                    </Border>
+
+                                    <Border Style="{StaticResource SettingsCardStyle}" Margin="0,0,0,0">
+                                        <StackPanel>
+                                            <TextBlock x:Name="LabelProtectedMemberships" Style="{StaticResource SettingsSectionHeaderStyle}" />
+                                            <TextBlock x:Name="LabelProtectedMembershipsHint"
+                                                Margin="0,0,0,14"
+                                                Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                                TextWrapping="Wrap" />
+                                            <Border Padding="12"
+                                                CornerRadius="8"
+                                                Background="{StaticResource SettingsAccentSoftBrush}"
+                                                BorderBrush="{StaticResource SettingsHeroBorderBrush}"
+                                                BorderThickness="1">
+                                                <TextBlock x:Name="ProfileGroupsText"
+                                                    TextWrapping="Wrap" />
+                                            </Border>
+                                        </StackPanel>
+                                    </Border>
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="2">
+                                    <Border Style="{StaticResource SettingsCardStyle}">
+                                        <StackPanel>
+                                            <TextBlock x:Name="LabelEditableDetails" Style="{StaticResource SettingsSectionHeaderStyle}" />
+                                            <TextBlock x:Name="LabelEditableDetailsHint"
+                                                Margin="0,0,0,14"
+                                                Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                                TextWrapping="Wrap" />
+
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="14" />
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
+
+                                                <StackPanel Grid.Column="0">
+                                                    <TextBlock x:Name="LabelFirstName1" Style="{StaticResource SettingsLabelStyle}" />
+                                                    <ui:TextBox x:Name="ProfileFirstNameBox" Margin="0,0,0,12" />
+
+                                                    <TextBlock x:Name="LabelEmail1" Style="{StaticResource SettingsLabelStyle}" />
+                                                    <ui:TextBox x:Name="ProfileEditableEmailBox" Margin="0,0,0,12" />
+
+                                                    <TextBlock x:Name="LabelDepartment1" Style="{StaticResource SettingsLabelStyle}" />
+                                                    <ui:TextBox x:Name="ProfileDepartmentBox" Margin="0,0,0,12" />
+                                                </StackPanel>
+
+                                                <StackPanel Grid.Column="2">
+                                                    <TextBlock x:Name="LabelLastName1" Style="{StaticResource SettingsLabelStyle}" />
+                                                    <ui:TextBox x:Name="ProfileLastNameBox" Margin="0,0,0,12" />
+
+                                                    <TextBlock x:Name="LabelJobTitle1" Style="{StaticResource SettingsLabelStyle}" />
+                                                    <ui:TextBox x:Name="ProfileTitleBox" Margin="0,0,0,12" />
+
+                                                    <TextBlock x:Name="LabelDescription1" Style="{StaticResource SettingsLabelStyle}" />
+                                                    <TextBox x:Name="ProfileDescriptionBox"
+                                                        Height="140"
+                                                        VerticalScrollBarVisibility="Auto"
+                                                        HorizontalScrollBarVisibility="Disabled"
+                                                        AcceptsReturn="True"
+                                                        TextWrapping="Wrap" />
+                                                </StackPanel>
+                                            </Grid>
+                                        </StackPanel>
+                                    </Border>
+
+                                    <Border Style="{StaticResource SettingsCardStyle}" Margin="0,0,0,0">
+                                        <StackPanel>
+                                            <TextBlock x:Name="LabelSaveChanges1" Style="{StaticResource SettingsSectionHeaderStyle}" />
+                                            <TextBlock x:Name="ProfileStatusMessage"
+                                                Margin="0,0,0,14"
+                                                TextWrapping="Wrap"
+                                                Visibility="Collapsed" />
+                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                                <ui:Button x:Name="ProfileSaveButton"
+                                                    Style="{StaticResource PrimaryButtonStyle}"
+                                                    Click="OnProfileSave"
+                                                    Margin="0,0,8,0" />
+                                                <ui:Button x:Name="ProfileResetButton"
+                                                    Style="{StaticResource SecondaryButtonStyle}"
+                                                    Click="OnProfileReset" />
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </Border>
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+
+                        <Border Grid.Row="0"
+                            x:Name="ProfileEmptyStatePanel"
+                            Visibility="Visible"
+                            Background="{DynamicResource ControlFillColorDefaultBrush}"
+                            BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                            BorderThickness="1"
+                            CornerRadius="14"
+                            Padding="34,32">
+                            <StackPanel>
+                                <TextBlock x:Name="ProfileUnavailableTitle"
+                                    FontSize="24"
+                                    FontWeight="SemiBold" />
+                                <TextBlock x:Name="ProfileEmptyStateMessage"
+                                    Margin="0,10,0,0"
+                                    FontSize="14"
+                                    Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                    TextWrapping="Wrap" />
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                </TabItem>
+
+                <!-- Database tab -->
+                <TabItem Header="{Binding [Settings_Tab_Database], Source={x:Static loc:TranslationSource.Instance}}">
+                    <StackPanel Margin="0,16,0,0" MaxWidth="760" HorizontalAlignment="Left">
+                        <Border x:Name="DbStatusBadge" CornerRadius="4" Padding="10,6"
+                                Margin="0,0,0,24" HorizontalAlignment="Left">
+                            <TextBlock x:Name="DbStatusBadgeText" FontSize="13" FontWeight="SemiBold"/>
+                        </Border>
+
+                        <Border Style="{StaticResource SettingsCardStyle}">
+                            <StackPanel>
+                                <TextBlock Text="{Binding [Db_Title], Source={x:Static loc:TranslationSource.Instance}}"
+                                    FontSize="16"
+                                    FontWeight="SemiBold"
+                                    Margin="0,0,0,8"/>
+
+                                <TextBlock Text="{Binding [Db_HintText], Source={x:Static loc:TranslationSource.Instance}}"
+                                    TextWrapping="Wrap"
+                                    Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                    FontSize="13"
+                                    Margin="0,0,0,16"/>
+
+                                <Grid Margin="0,0,0,8">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="170"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Text="{Binding [Label_Server], Source={x:Static loc:TranslationSource.Instance}}"
+                                        VerticalAlignment="Center" FontSize="13"/>
+                                    <TextBox Grid.Column="1" x:Name="DbServerBox"
+                                        FontSize="13" TextChanged="OnSettingChanged"/>
+                                </Grid>
+
+                                <Grid Margin="0,0,0,8">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="170"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Text="{Binding [Label_Port], Source={x:Static loc:TranslationSource.Instance}}"
+                                        VerticalAlignment="Center" FontSize="13"/>
+                                    <TextBox Grid.Column="1" x:Name="DbPortBox"
+                                        FontSize="13" TextChanged="OnSettingChanged"/>
+                                </Grid>
+
+                                <Grid Margin="0,0,0,8">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="170"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Text="{Binding [Label_Database], Source={x:Static loc:TranslationSource.Instance}}"
+                                        VerticalAlignment="Center" FontSize="13"/>
+                                    <TextBox Grid.Column="1" x:Name="DbNameBox"
+                                        FontSize="13" TextChanged="OnSettingChanged"/>
+                                </Grid>
+
+                                <Grid Margin="0,0,0,8">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="170"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Text="{Binding [Label_User], Source={x:Static loc:TranslationSource.Instance}}"
+                                        VerticalAlignment="Center" FontSize="13"/>
+                                    <TextBox Grid.Column="1" x:Name="DbUserBox"
+                                        FontSize="13" TextChanged="OnSettingChanged"/>
+                                </Grid>
+
+                                <Grid Margin="0,0,0,8">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="170"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Text="{Binding [Label_Password], Source={x:Static loc:TranslationSource.Instance}}"
+                                        VerticalAlignment="Center" FontSize="13"/>
+                                    <PasswordBox Grid.Column="1" x:Name="DbPasswordBox"
+                                        FontSize="13"
+                                        PasswordChanged="OnPasswordChanged"/>
+                                </Grid>
+
+                                <Separator Margin="0,8,0,12"/>
+
+                                <!-- Raw connection string input -->
+                                <Grid Margin="0,0,0,4">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="170"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0"
+                                        Text="{Binding [Label_ConnectionString], Source={x:Static loc:TranslationSource.Instance}}"
+                                        VerticalAlignment="Top" Margin="0,6,0,0" FontSize="13"/>
+                                    <TextBox Grid.Column="1" x:Name="DbConnectionStringBox"
+                                        FontSize="12" FontFamily="Consolas"
+                                        TextWrapping="Wrap" AcceptsReturn="False"
+                                        Height="64" VerticalScrollBarVisibility="Auto"
+                                        TextChanged="OnConnectionStringBoxChanged"/>
+                                </Grid>
+                                <TextBlock
+                                    Text="{Binding [Label_ConnectionString_Hint], Source={x:Static loc:TranslationSource.Instance}}"
+                                    TextWrapping="Wrap"
+                                    Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                    FontSize="11"
+                                    Margin="170,0,0,4"/>
+                                <StackPanel Orientation="Horizontal" Margin="170,0,0,16">
+                                    <ui:Button x:Name="ParseButton"
+                                        Content="{Binding [Btn_ParseConnectionString], Source={x:Static loc:TranslationSource.Instance}}"
+                                        Style="{StaticResource SecondaryButtonStyle}"
+                                        Click="OnParseConnectionString"/>
+                                </StackPanel>
+
+                                <Separator Margin="0,0,0,16"/>
+
+                                <Grid Margin="0,0,0,8">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="170"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Text="{Binding [Label_CompanyName], Source={x:Static loc:TranslationSource.Instance}}"
+                                        VerticalAlignment="Center" FontSize="13"/>
+                                    <TextBox Grid.Column="1" x:Name="DbCompanyNameBox"
+                                        FontSize="13" TextChanged="OnSettingChanged"/>
+                                </Grid>
+
+                                <TextBlock Text="{Binding [Db_CompanyNameHint], Source={x:Static loc:TranslationSource.Instance}}"
+                                    TextWrapping="Wrap"
+                                    Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                    FontSize="12"
+                                    Margin="170,0,0,8"/>
+
+                                <Grid Margin="0,0,0,20">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="170"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Text="{Binding [Label_DomainName], Source={x:Static loc:TranslationSource.Instance}}"
+                                        VerticalAlignment="Center" FontSize="13"/>
+                                    <TextBox Grid.Column="1" x:Name="DbDomainNameBox"
+                                        FontSize="13" TextChanged="OnSettingChanged"/>
+                                </Grid>
+
+                                <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
+                                    <ui:Button x:Name="SaveButton"
+                                        Style="{StaticResource PrimaryButtonStyle}"
+                                        Click="OnSave" IsEnabled="False"
+                                        Margin="0,0,8,0"/>
+                                    <ui:Button x:Name="TestButton"
+                                        Style="{StaticResource SecondaryButtonStyle}"
+                                        Click="OnTestConnection"
+                                        Margin="0,0,8,0"/>
+                                    <ui:Button x:Name="ReconnectButton"
+                                        Style="{StaticResource SecondaryButtonStyle}"
+                                        Click="OnReconnect" />
+                                </StackPanel>
+
+                                <TextBlock x:Name="StatusLabel"
+                                    FontSize="13"
+                                    Foreground="{DynamicResource TextFillColorSecondaryBrush}"/>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </TabItem>
+
+                <!-- Email tab -->
+                <TabItem Header="{Binding [Settings_Tab_Email], Source={x:Static loc:TranslationSource.Instance}}">
+                    <StackPanel Margin="0,16,0,0" MaxWidth="760" HorizontalAlignment="Left">
+                        <Border Style="{StaticResource SettingsCardStyle}">
+                            <StackPanel>
+                                <TextBlock Text="{Binding [Email_Title], Source={x:Static loc:TranslationSource.Instance}}"
+                                    FontSize="16"
+                                    FontWeight="SemiBold"
+                                    Margin="0,0,0,8"/>
+
+                                <TextBlock Text="{Binding [Email_HintText], Source={x:Static loc:TranslationSource.Instance}}"
+                                    TextWrapping="Wrap"
+                                    Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                    FontSize="13"
+                                    Margin="0,0,0,16"/>
+
+                                <!-- Enabled toggle -->
+                                <Grid Margin="0,0,0,12">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="170"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Text="{Binding [Email_EnableNotifications], Source={x:Static loc:TranslationSource.Instance}}"
+                                        VerticalAlignment="Center" FontSize="13"/>
+                                    <CheckBox Grid.Column="1" x:Name="EmailEnabledBox"
+                                        VerticalAlignment="Center"
+                                        Checked="OnEmailSettingChanged"
+                                        Unchecked="OnEmailSettingChanged"/>
+                                </Grid>
+
+                                <!-- SMTP server -->
+                                <Grid Margin="0,0,0,8">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="170"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Text="{Binding [Email_SmtpServer], Source={x:Static loc:TranslationSource.Instance}}"
+                                        VerticalAlignment="Center" FontSize="13"/>
+                                    <TextBox Grid.Column="1" x:Name="SmtpServerBox"
+                                        FontSize="13" TextChanged="OnEmailSettingChanged"/>
+                                </Grid>
+
+                                <!-- Port + SSL -->
+                                <Grid Margin="0,0,0,8">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="170"/>
+                                        <ColumnDefinition Width="80"/>
+                                        <ColumnDefinition Width="16"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Text="{Binding [Label_Port], Source={x:Static loc:TranslationSource.Instance}}"
+                                        VerticalAlignment="Center" FontSize="13"/>
+                                    <TextBox Grid.Column="1" x:Name="SmtpPortBox"
+                                        FontSize="13" TextChanged="OnEmailSettingChanged"/>
+                                    <CheckBox Grid.Column="3" x:Name="SmtpSslBox"
+                                        Content="{Binding [Email_UseStartTls], Source={x:Static loc:TranslationSource.Instance}}"
+                                        VerticalAlignment="Center" FontSize="13"
+                                        Checked="OnEmailSettingChanged"
+                                        Unchecked="OnEmailSettingChanged"/>
+                                </Grid>
+
+                                <!-- Sender address -->
+                                <Grid Margin="0,0,0,8">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="170"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Text="{Binding [Email_SenderAddress], Source={x:Static loc:TranslationSource.Instance}}"
+                                        VerticalAlignment="Center" FontSize="13"/>
+                                    <TextBox Grid.Column="1" x:Name="SmtpSenderBox"
+                                        FontSize="13" TextChanged="OnEmailSettingChanged"/>
+                                </Grid>
+
+                                <!-- Sender name -->
+                                <Grid Margin="0,0,0,8">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="170"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Text="{Binding [Email_SenderName], Source={x:Static loc:TranslationSource.Instance}}"
+                                        VerticalAlignment="Center" FontSize="13"/>
+                                    <TextBox Grid.Column="1" x:Name="SmtpSenderNameBox"
+                                        FontSize="13" TextChanged="OnEmailSettingChanged"/>
+                                </Grid>
+
+                                <!-- Auth username -->
+                                <Grid Margin="0,0,0,8">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="170"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Text="{Binding [Email_SmtpUsername], Source={x:Static loc:TranslationSource.Instance}}"
+                                        VerticalAlignment="Center" FontSize="13"/>
+                                    <TextBox Grid.Column="1" x:Name="SmtpUsernameBox"
+                                        FontSize="13" TextChanged="OnEmailSettingChanged"/>
+                                </Grid>
+
+                                <!-- Auth password -->
+                                <Grid Margin="0,0,0,16">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="170"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Text="{Binding [Email_SmtpPassword], Source={x:Static loc:TranslationSource.Instance}}"
+                                        VerticalAlignment="Center" FontSize="13"/>
+                                    <PasswordBox Grid.Column="1" x:Name="SmtpPasswordBox"
+                                        FontSize="13" PasswordChanged="OnEmailPasswordChanged"/>
+                                </Grid>
+
+                                <!-- Recipients -->
+                                <TextBlock Text="{Binding [Email_Recipients], Source={x:Static loc:TranslationSource.Instance}}" FontSize="13" Margin="0,0,0,6"/>
+                                <TextBox x:Name="SmtpRecipientsBox"
+                                    Height="80"
+                                    VerticalScrollBarVisibility="Auto"
+                                    AcceptsReturn="True"
+                                    TextWrapping="Wrap"
+                                    FontSize="13"
+                                    Margin="0,0,0,16"
+                                    TextChanged="OnEmailSettingChanged"/>
+
+                                <!-- Notification type checkboxes -->
+                                <TextBlock Text="{Binding [Email_NotifyWhen], Source={x:Static loc:TranslationSource.Instance}}" FontSize="13" FontWeight="SemiBold" Margin="0,0,0,8"/>
+                                <CheckBox x:Name="NotifyTerminationBox"
+                                    Content="{Binding [Email_NotifyTermination], Source={x:Static loc:TranslationSource.Instance}}"
+                                    FontSize="13" Margin="0,0,0,6"
+                                    Checked="OnEmailSettingChanged" Unchecked="OnEmailSettingChanged"/>
+                                <CheckBox x:Name="NotifyRollbackBox"
+                                    Content="{Binding [Email_NotifyRollback], Source={x:Static loc:TranslationSource.Instance}}"
+                                    FontSize="13" Margin="0,0,0,6"
+                                    Checked="OnEmailSettingChanged" Unchecked="OnEmailSettingChanged"/>
+                                <CheckBox x:Name="NotifyStepFailureBox"
+                                    Content="{Binding [Email_NotifyStepFailure], Source={x:Static loc:TranslationSource.Instance}}"
+                                    FontSize="13" Margin="0,0,0,16"
+                                    Checked="OnEmailSettingChanged" Unchecked="OnEmailSettingChanged"/>
+
+                                <!-- Action buttons -->
+                                <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
+                                    <ui:Button x:Name="EmailSaveButton"
+                                        Style="{StaticResource PrimaryButtonStyle}"
+                                        Click="OnEmailSave" IsEnabled="False"
+                                        Margin="0,0,8,0"/>
+                                    <ui:Button x:Name="EmailTestButton"
+                                        Style="{StaticResource SecondaryButtonStyle}"
+                                        Click="OnEmailTest"/>
+                                </StackPanel>
+
+                                <TextBlock x:Name="EmailStatusLabel"
+                                    FontSize="13"
+                                    TextWrapping="Wrap"
+                                    Foreground="{DynamicResource TextFillColorSecondaryBrush}"/>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </TabItem>
+            </TabControl>
+        </StackPanel>
+    </ScrollViewer>
+</Page>
